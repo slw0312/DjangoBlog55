@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from .models import ArticlePost
 import markdown
 # 引入AriticlePostForm表单类
-from .form import ArticlePostForm
+from .forms import ArticlePostForm
 # 引入User模型
 from django.contrib.auth.models import User
+# 引入验证登录的装饰器
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -37,6 +39,7 @@ def article_detail(request, id):
 
 
 # 用户文章视图
+@login_required(login_url='userprofile/login/')  # 检查登录
 def article_create(request):
     # 判断用户是否提交数据
     if request.method == 'POST':
@@ -46,10 +49,8 @@ def article_create(request):
         if article_post_form.is_valid():
             # 保存数据，但暂时不提交到数据库中
             new_article = article_post_form.save(commit=False)
-            # 指定数据库中id=1的用户为作者
-            # 如果进行过删除数据表的操作，可能会找不到id=1的用户
-            # 此时请重新创建用户，并传入此用户的id
-            new_article.author = User.objects.get(id=1)
+            # 指定目前登录的用户为作者
+            new_article.author = User.objects.get(id=request.user.id)
             # 将文章保存到数据库中
             new_article.save()
             # 完成后返回到文章列表
@@ -66,6 +67,7 @@ def article_create(request):
         return render(request, 'create.html')
 
 
+# TODO:article_delete&article_update need verification
 # 删除文章
 def article_delete(request, id):
     # 根据id获取需要删除的文章
@@ -101,6 +103,7 @@ def article_update(request, id):
             article.body = request.POST['body']
             article.save()
             # 完成后返回到修改后的文章中。需传入文章的id值
+            # request.session['id'] = id
             return redirect('article:article_detail', id=id)
         # 如果数据不合法，返回错误信息
         else:
@@ -113,4 +116,3 @@ def article_update(request, id):
         context = {'article': article}
         # 将响应返回到模板中
         return render(request, 'update.html', context)
-
