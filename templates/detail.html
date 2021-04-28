@@ -14,23 +14,40 @@
     <div class="container">
         <div class="row">
             <!-- 标题及作者 -->
-            <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
-            <div class="col-12 alert alert-success">作者：{{ article.author }}
-                {#                <a href="#" onclick="confirm_delete()">删除文章</a>#}
-                <!--表单发起 POST 请求，并携带了 csrf 令牌，从而避免了 csrf 攻击-->
-                <a href="#" onclick="confirm_safe_delete()">删除文章</a>
-                <a href="{% url 'article:article_update' article.id %}">编辑文章</a>
-                <!-- 新增一个隐藏的表单 -->
-                <form
-                        style="display:none;"
-                        id="safe_delete"
-                        action="{% url 'article:article_safe_delete' article.id %}"
-                        method="POST"
-                >
-                    {% csrf_token %}
-                    <button type="submit">发送</button>
-                </form>
+            <div class="col-9">
+                <h1 class=" mt-4 mb-4">{{ article.title }}</h1>
+                <div class="col-12 alert alert-success">作者：{{ article.author }}
+                    {% if user == article.author %}
+                    {#                <a href="#" onclick="confirm_delete()">删除文章</a>#}
+                    <!--表单发起 POST 请求，并携带了 csrf 令牌，从而避免了 csrf 攻击-->
+                        <a href="#" onclick="confirm_safe_delete()">删除文章</a>
+                        <a href="{% url 'article:article_update' article.id %}">编辑文章</a>
+                    {% endif %}
+                    <!-- 新增一个隐藏的表单 -->
+                    <form
+                            style="display:none;"
+                            id="safe_delete"
+                            action="{% url 'article:article_safe_delete' article.id %}"
+                            method="POST"
+                    >
+                        {% csrf_token %}
+                        <button type="submit">发送</button>
+                    </form>
+                    <div>
+                        浏览：{{ article.total_views }}
+                    </div>
+                </div>
             </div>
+
+            <!-- 目录 -->
+            <div class="col-3 mt-4">
+                <h4><strong>目录</strong></h4>
+                <hr>
+                <div>
+                    {{ toc|safe }}
+                </div>
+            </div>
+
             <!-- 文章正文 -->
             <div class="col-12">
                 <p>{{ article.body|safe }}</p>
