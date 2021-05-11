@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'article',
     'userprofile',
     'comment',
+    'home',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',  # 数据库的类型
         'NAME': 'django_blog',  # 所使用的的数据库的名字
         'USER': 'root',  # 数据库服务器的用户
-        'PASSWORD': 'Jyj2018jyjy',  # 密码
+        'PASSWORD': 'root',  # 密码
         'HOST': '127.0.0.1',  # 主机
         'PORT': '3306',  # 端口
     }
