@@ -13,18 +13,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#!kkqdbp3&lgnsjltv*6c7u*b*!uyum+j=bp5)v4hssjzr=u_7'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Application definition
 
@@ -73,20 +62,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'DjangoBlog.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',  # 数据库的类型
-        'NAME': 'django_blog',  # 所使用的的数据库的名字
-        'USER': 'root',  # 数据库服务器的用户
-        'PASSWORD': 'root',  # 密码
-        'HOST': '127.0.0.1',  # 主机
-        'PORT': '3306',  # 端口
-    }
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -126,19 +101,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-# SMTP服务器
-EMAIL_HOST = 'smtp.163.com'
-# 邮箱名
-EMAIL_HOST_USER = 'jyj1519691288@163.com'
-# 授权码
-EMAIL_HOST_PASSWORD = 'DOUQDJBJSSLPIEGA'
-# 发送邮件的端口
-EMAIL_PORT = 465
-# 是否使用 TLS
-EMAIL_USE_SSL = True
-# 默认的发件人
-DEFAULT_FROM_EMAIL = 'jyj的博客 <jyj1519691288@163.com>'
-
 # 媒体文件地址
-MEDIA_URL = '/media/'   # 用户上传文件访问位置
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')   # 用户上传文件保存位置
+MEDIA_URL = '/media/'  # 用户上传文件访问位置
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # 用户上传文件保存位置

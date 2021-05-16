@@ -8,6 +8,19 @@ from django.utils import timezone
 from django.urls import reverse
 
 
+class ArticleColumn(models.Model):
+    """
+    栏目的 Model
+    """
+    # 栏目标题
+    title = models.CharField(max_length=100, blank=True)
+    # 创建时间
+    created = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.title
+
+
 # 博客文章数据模型
 class ArticlePost(models.Model):
     # 文章作者。参数 on_delete 用于指定数据删除的方式，避免两个关联表的数据不一致。
@@ -22,6 +35,14 @@ class ArticlePost(models.Model):
     updated = models.DateTimeField(auto_now=True)
     # 文章浏览量
     total_views = models.PositiveIntegerField(default=0)
+    # 文章栏目的“一对多”外键
+    column = models.ForeignKey(
+        ArticleColumn,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name='article'
+    )
 
     class Meta:
         db_table = 'article'

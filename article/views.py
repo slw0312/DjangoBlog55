@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
-from .models import ArticlePost
+from .models import ArticlePost,ArticleColumn
 import markdown
 # 引入AriticlePostForm表单类
 from .forms import ArticlePostForm
@@ -120,6 +120,8 @@ def article_create(request):
             new_article = article_post_form.save(commit=False)
             # 指定目前登录的用户为作者
             new_article.author = User.objects.get(id=request.user.id)
+            if request.POST['column']!='none':
+                new_article.column=ArticleColumn.objects.get(id=request.POST['column'])
             # 将文章保存到数据库中
             new_article.save()
             # 完成后返回到文章列表
@@ -131,8 +133,9 @@ def article_create(request):
     else:
         # 创建表单类实例
         article_post_form = ArticlePostForm()
+        columns = ArticleColumn.objects.all()
         # 赋值上下文
-        context = {'article_post_form': article_post_form}
+        context = {'article_post_form': article_post_form,'columns':columns}
         return render(request, 'create.html')
 
 
