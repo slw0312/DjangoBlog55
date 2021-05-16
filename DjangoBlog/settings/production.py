@@ -17,7 +17,7 @@ from .base import *
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = '0l%fl@0qqa5wj@mac@ow_jdipaw=a$k*%)goq+l%n_&p20f02d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -26,13 +26,13 @@ ALLOWED_HOSTS = ['47.102.140.173']
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-DATABASE_PASSWORD = os.environ['DATABASE_PASSWORD']
+# DATABASE_PASSWORD = os.environ['DATABASE_PASSWORD']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库的类型
         'NAME': 'django_blog',  # 所使用的的数据库的名字
         'USER': 'SpencerYJJ',  # 数据库服务器的用户
-        'PASSWORD': DATABASE_PASSWORD,  # 密码
+        'PASSWORD': 'Jyj2018jyjy',  # 密码
         'HOST': '127.0.0.1',  # 主机
         'PORT': '3306',  # 端口
     }
@@ -43,7 +43,7 @@ EMAIL_HOST = 'smtp.163.com'
 # 邮箱名
 EMAIL_HOST_USER = 'jyj1519691288@163.com'
 # 授权码
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_HOST_PASSWORD = 'DOUQDJBJSSLPIEGA'
 # 发送邮件的端口
 EMAIL_PORT = 465
 # 是否使用 SSL
