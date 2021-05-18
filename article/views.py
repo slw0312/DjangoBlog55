@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
-from .models import ArticlePost,ArticleColumn
+from .models import ArticlePost, ArticleColumn
 import markdown
 # 引入AriticlePostForm表单类
 from .forms import ArticlePostForm
@@ -14,9 +14,27 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 # 引入comment模型
 from comment.models import Comment
+# 引入第三方库pure_pagination的分页混入类
+from pure_pagination.mixins import PaginationMixin
+
+from django.views.generic import ListView
 
 
 # Create your views here.
+# 首页类视图
+class IndexView(PaginationMixin, ListView):
+    model = ArticlePost
+    template_name = 'index.html'  # 指定模板
+    context_object_name = 'post_list'  # 指定获取的模型列表数据保存的变量名，这个变量会被传递给模板。
+    paginate_by = 10  # 每页文章数
+
+
+# TODO:此处为about页面临时视图，将其放到合适的地方
+def about(request):
+    return render(request, 'about.html')
+
+
+# 文章列表视图
 def article_list(request):
     # # 取出所有博客文章
     # articles = ArticlePost.objects.all()
@@ -67,7 +85,7 @@ def article_list(request):
 
     context = {'articles': articles, 'order': order, 'search': search}
     # render函数：载入模板，并返回context对象
-    return render(request, 'list.html', context)
+    return render(request, 'index.html', context)
 
 
 # 文章详情
@@ -75,7 +93,7 @@ def article_detail(request, id):
     # 取出相应的文章
     article = ArticlePost.objects.get(id=id)
     # 取出文章评论
-    comments = Comment.objects.filter(article=id)   # 取出多个满足条件的对象
+    comments = Comment.objects.filter(article=id)  # 取出多个满足条件的对象
     # 浏览量+1
     article.total_views += 1
     article.save(update_fields=['total_views'])  # update_fields=[]指定了数据库只更新total_views字段
@@ -102,7 +120,7 @@ def article_detail(request, id):
     article.body = md.convert(article.body)
 
     # 需要传递给模板的对象
-    context = {'article': article, 'toc': md.toc,'comments':comments}
+    context = {'article': article, 'toc': md.toc, 'comments': comments}
     # 载入模板，并返回context对象
     return render(request, 'detail.html', context)
 
@@ -120,8 +138,8 @@ def article_create(request):
             new_article = article_post_form.save(commit=False)
             # 指定目前登录的用户为作者
             new_article.author = User.objects.get(id=request.user.id)
-            if request.POST['column']!='none':
-                new_article.column=ArticleColumn.objects.get(id=request.POST['column'])
+            if request.POST['column'] != 'none':
+                new_article.column = ArticleColumn.objects.get(id=request.POST['column'])
             # 将文章保存到数据库中
             new_article.save()
             # 完成后返回到文章列表
@@ -135,7 +153,7 @@ def article_create(request):
         article_post_form = ArticlePostForm()
         columns = ArticleColumn.objects.all()
         # 赋值上下文
-        context = {'article_post_form': article_post_form,'columns':columns}
+        context = {'article_post_form': article_post_form, 'columns': columns}
         return render(request, 'create.html')
 
 
