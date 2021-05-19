@@ -130,18 +130,18 @@
                             <div class="menu-wrapper">
                                 <div class="menu-content">
                                     <ul class="mainmenu">
-                                        <li><a href="#">Home</a></li>
+                                        <li><a href="{% url 'article:article_list' %}">首页</a></li>
                                         <li class="megamenu">
-                                            <a href="#">Features</a>
+                                            <a href="#">清单</a>
                                             <ul class="sub-menu megamenu-main">
                                                 <li>
                                                     拉下测试
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a class="active" href="gallery.html">Photo Stories</a></li>
-                                        <li><a href="about.html">About Me</a></li>
-                                        <li><a href="contact.html">contact</a></li>
+                                        <li><a class="active" href="gallery.html">归档</a></li>
+                                        <li><a href="{% url 'article:about' %}">关于</a></li>
+                                        <li><a href="contact.html">联系</a></li>
                                     </ul> <!-- /.menu-list -->
                                 </div> <!-- /.hours-content-->
                             </div><!-- /.menu-wrapper -->

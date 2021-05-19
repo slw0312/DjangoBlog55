@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.http import HttpResponse
 from .models import ArticlePost, ArticleColumn
 import markdown
@@ -97,7 +97,7 @@ def article_list(request):
     if order == 'total_views':
         article_list = article_list.order_by('-total_views')
 
-    paginator = Paginator(article_list, 3)
+    paginator = Paginator(article_list, 6)
     page = request.GET.get('page')
     articles = paginator.get_page(page)
 
@@ -111,6 +111,7 @@ def article_list(request):
     }
     # render函数：载入模板，并返回context对象
     return render(request, 'index.html', context)
+    # return render(request, 'list.html', context)
 
 
 # 文章详情
@@ -148,6 +149,7 @@ def article_detail(request, id):
     context = {'article': article, 'toc': md.toc, 'comments': comments}
     # 载入模板，并返回context对象
     return render(request, 'single-post.html', context)
+    # return render(request, 'detail.html', context)
 
 
 # 用户文章视图
@@ -249,3 +251,18 @@ def article_update(request, id):
         }
         # 将响应返回到模板中
         return render(request, 'update.html', context)
+
+
+# 分类
+def category(request, pk):
+    cate = get_object_or_404(ArticleColumn, pk=pk)
+    post_list = ArticlePost.objects.filter(column=cate).order_by('-created')
+    return render(request, 'index.html', context={'post_list': post_list})
+
+
+# 归档
+def archive(request, year, month):
+    post_list = ArticlePost.objects.filter(
+        created__year=year,
+        created__month=month).order_by('-created')
+    return render(request, 'index.html', context={'post_list': post_list})

@@ -1,0 +1,20 @@
+from django import template
+from django.db.models.aggregates import Count
+from ..models import ArticlePost, ArticleColumn, TaggableManager
+
+register = template.Library()
+
+
+@register.inclusion_tag('article/inclusions/_archives.html', takes_context=True)
+def show_archives(context):
+    return {
+        'date_list': ArticlePost.objects.dates('created', 'month', order='DESC'),
+    }
+
+
+@register.inclusion_tag('article/inclusions/_categories.html', takes_context=True)
+def show_categories(context):
+    category_list = ArticleColumn.objects.annotate(num_posts=Count('article')).filter(num_posts__gt=0)
+    return {
+        'category_list': category_list,
+    }

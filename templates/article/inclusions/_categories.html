@@ -1,0 +1,17 @@
+<aside class="widget widget_categories">
+    <h4 class="widget-title">分类</h4>
+    <ul>
+        {% for category in category_list %}
+            <li>
+                <a href="{% url 'article:category' category.pk %}">
+                    {{ category.title }}
+                    <span class="post-count">
+                        ({{ category.num_posts }})
+                    </span>
+                </a>
+            </li>
+        {% empty %}
+            暂无分类！
+        {% endfor %}
+    </ul>
+</aside>

@@ -1,3 +1,4 @@
+{% load article_extras %}
 <div class="col-lg-3">
     <!-- Sidebar Items -->
     <div class="sidebar-items style-one">
@@ -9,7 +10,7 @@
             <!-- /.widget-title -->
             <div class="widget-content">
                 <div class="author-thumb">
-                    <a href="{% url 'article:about' %}"><img src="../static/assets/images/widget/about/about-me.jpg" alt="img"/></a>
+                    <a href="{% url 'article:about' %}"><img src="{{ profile.avatar.url }}" alt="img"/></a>
                 </div>
                 <div class="info">
                     <h3 class="designation">Writer & Photographer</h3>
@@ -26,33 +27,12 @@
         <!--~./ end about me widget ~-->
 
         <!--~~~~~ Start Categories Widget ~~~~~-->
-        <aside class="widget widget_categories">
-            <h4 class="widget-title">
-                Categories
-            </h4>
-            <!-- /.widget-title -->
-            <div class="widget-content">
-                <ul>
-                    <li>
-                        <a href="#">Foods <span class="count">24</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Reciepes <span class="count">22</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Diet <span class="count">60</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Health Foods <span class="count">34</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Fast Foods <span class="count">17</span></a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.widget-content -->
-        </aside>
+        {% show_categories %}
         <!--~./ end categories widget ~-->
+
+        <!--~~~~~ Start Post List Widget~~~~~-->
+        {% show_archives %}
+        <!--~./ end post list widget ~-->
 
         <!--~~~~~ Start Bt Social Widget~~~~~-->
         <aside class="widget bt-socail-widget">
@@ -103,101 +83,6 @@
             </div>
         </aside>
         <!--~./ end bt social widget ~-->
-
-        <!--~~~~~ Start Post List Widget~~~~~-->
-        <aside class="widget widget-post-list">
-            <h4 class="widget-title">Recent Post</h4>
-            <!-- /.widget-title -->
-
-            <div class="widget-content">
-                <article class="post">
-                    <div class="thumb-wrap">
-                        <a href="single-post.html">
-                            <img src="../static/assets/images/widget/post/wp_1.jpg" alt="post"/>
-                        </a>
-                    </div>
-                    <!--./ thumb-wrap -->
-                    <div class="content-entry-wrap">
-                        <h3 class="entry-title">
-                            <a href="single-post.html">Best Wordpress Theme of 2018</a>
-                        </h3>
-                        <!--./ entry-title -->
-                        <div class="entry-meta-content">
-                            <div class="entry-date">
-                                August 23, 2015
-                            </div>
-                        </div>
-                        <!--./ entry-meta-content -->
-                    </div>
-                </article>
-                <!--./ end post -->
-                <article class="post">
-                    <div class="thumb-wrap">
-                        <a href="single-post.html">
-                            <img src="../static/assets/images/widget/post/wp_2.jpg" alt="post"/>
-                        </a>
-                    </div>
-                    <!--./ thumb-wrap -->
-                    <div class="content-entry-wrap">
-                        <h3 class="entry-title">
-                            <a href="single-post.html">Dating While Studying Minimize
-                                Heartbreak</a>
-                        </h3>
-                        <!--./ entry-title -->
-                        <div class="entry-meta-content">
-                            <div class="entry-date">
-                                August 23, 2015
-                            </div>
-                        </div>
-                        <!--./ entry-meta-content -->
-                    </div>
-                </article>
-                <!--./ end post -->
-                <article class="post">
-                    <div class="thumb-wrap">
-                        <a href="single-post.html">
-                            <img src="../static/assets/images/widget/post/wp_3.jpg" alt="post"/>
-                        </a>
-                    </div>
-                    <!--./ thumb-wrap -->
-                    <div class="content-entry-wrap">
-                        <h3 class="entry-title">
-                            <a href="single-post.html">Nature Photography Best Place Focus</a>
-                        </h3>
-                        <!--./ entry-title -->
-                        <div class="entry-meta-content">
-                            <div class="entry-date">
-                                August 23, 2015
-                            </div>
-                        </div>
-                        <!--./ entry-meta-content -->
-                    </div>
-                </article>
-                <!--./ end post -->
-                <article class="post">
-                    <div class="thumb-wrap">
-                        <a href="single-post.html">
-                            <img src="../static/assets/images/widget/post/wp_4.jpg" alt="post"/>
-                        </a>
-                    </div>
-                    <!--./ thumb-wrap -->
-                    <div class="content-entry-wrap">
-                        <h3 class="entry-title">
-                            <a href="single-post.html">Best Wordpress Theme of 2018</a>
-                        </h3>
-                        <!--./ entry-title -->
-                        <div class="entry-meta-content">
-                            <div class="entry-date">
-                                August 23, 2015
-                            </div>
-                        </div>
-                        <!--./ entry-meta-content -->
-                    </div>
-                </article>
-                <!--./ end post -->
-            </div>
-        </aside>
-        <!--~./ end post list widget ~-->
 
         <!--~~~~~ Start Advertisement Widget ~~~~~-->
         <aside class="widget widget_advertisement">

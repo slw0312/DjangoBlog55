@@ -19,6 +19,8 @@ urlpatterns = [
     path('article-update/<int:id>', views.article_update, name='article_update'),
     path('about', views.about, name='about'),
     path('single-post', views.single_post, name='single_post'),
+    path('article-list/categories/<int:pk>/', views.category, name='category'),
+    path('article-list/archives/<int:year>/<int:month>/', views.archive, name='archive'),
     # 类视图详情页
     # path('article-view/<int:pk>', views.ArticleDetailView.as_view(), name='...'),
     # 类视图创建文章页
