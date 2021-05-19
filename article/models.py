@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 from django.urls import reverse
+# Django-taggit
+from taggit.managers import TaggableManager
 
 
 class ArticleColumn(models.Model):
@@ -37,7 +39,9 @@ class ArticlePost(models.Model):
     updated = models.DateTimeField(auto_now=True)
     # 文章浏览量
     total_views = models.PositiveIntegerField(default=0)
-    # 文章栏目的“一对多”外键
+    # 文章标签
+    tags = TaggableManager(blank=True)
+    # 文章栏目的 “一对多” 外键
     column = models.ForeignKey(
         ArticleColumn,
         null=True,
