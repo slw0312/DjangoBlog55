@@ -5,275 +5,80 @@
     <title>首页</title>
 {% endblock title %}
 
+<!--插入轮播图-->
+{% block slideshow %}
+    {% include 'slideshow.html' %}
+{% endblock %}
+
+<!--左主体部分-->
 {% block content %}
-    <main class="site-main style-one">
-        <div class="row gutters-50">
-            <!--~~~~~ Start Post ~~~~~-->
-            <div class="col-lg-6 col-md-6">
-                {% for article in articles %}
-                <article class="post hentry post-grid text-center style-one">
-                    <div class="entry-thumb">
-                        <figure class="thumb-wrap">
-                            <a href="#">
-                                <img src="../static/assets/images/post/homeOne/grid/post1.jpg" alt="post"/>
-                            </a>
-                        </figure>
-                        <!--./ thumb-wrap -->
-                    </div>
-                    <!--./ entry-thumb -->
-                    <div class="content-entry-wrap">
-                        <div class="entry-category">
-                            <a class="cat" href="#">Design</a>
-                            <a class="cat" href="#">Travel</a>
-                            <a class="cat" href="#">Photography</a>
+    <!--占位-->
+    {% include 'blank.html' %}
+    <div class="main-wrapper pd-b-120">
+        <div class="container">
+            <div class="row justify-content-between gutters-50">
+                <div class="col-lg-9 main-wrapper-content">
+                    <main class="site-main style-one">
+                        <div class="row gutters-50">
+                            <!--文章列表-->
+                            {% for article in articles %}
+                                <div class="col-lg-6 col-md-6">
+                                    <article class="post hentry post-grid text-center style-one">
+                                        <div class="entry-thumb">
+                                            <figure class="thumb-wrap">
+                                                <a href="{% url 'article:article_detail' article.id %}">
+                                                    {% if article.introduce %}
+                                                        <img src="{{ article.introduce.url }}" alt="post"/>
+                                                    {% else %}
+                                                        <img src="/media/introduce/django.jpg" alt="post"/>
+                                                    {% endif %}
+                                                </a>
+                                            </figure>
+                                            <!--./ thumb-wrap -->
+                                        </div>
+                                        <!--./ entry-thumb -->
+                                        <div class="content-entry-wrap">
+                                            <div class="entry-category">
+                                                <a class="cat" href="#">Design</a>
+                                                <a class="cat" href="#">Travel</a>
+                                                <a class="cat" href="#">Photography</a>
+                                            </div>
+                                            <!--./ entry-category -->
+                                            <h3 class="entry-title">
+                                                <a href="{% url 'article:article_detail' article.id %}">
+                                                    {{ article.title }}</a>
+                                            </h3>
+                                            <!--./ entry-title -->
+                                            <div class="entry-meta-content">
+                                                <div class="entry-views">
+                                                    <i class="far fa-eye" aria-hidden="true">
+                                                        浏览量 {{ article.total_views }}</i>
+                                                </div>
+                                                <!--./ entry-date -->
+                                                <div class="entry-date">
+                                                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                                    更新日期 {{ article.updated|date:'Y-m-d' }}
+                                                </div>
+                                                <!--./ entry-date -->
+                                            </div>
+                                            <!--./ entry-meta-content -->
+                                            <div class="read-more-wrap">
+                                                <a class="read-more"
+                                                   href="{% url 'article:article_detail' article.id %}">点击获取详情</a>
+                                            </div>
+                                            <!--./ entry-content -->
+                                        </div>
+                                        <!--./ content-entry-wrap -->
+                                    </article>
+                                </div>
+                            {% endfor %}
+                            <!--~./ end post ~-->
                         </div>
-                        <!--./ entry-category -->
-                        <h3 class="entry-title">
-                            <a href="{% url 'article:article_detail' article.id %}">
-                                {{ article.title }}</a>
-                        </h3>
-                        <!--./ entry-title -->
-                        <div class="entry-meta-content">
-                            <div class="entry-author">
-                                By <a href="#">Zohan Alex</a>
-                            </div>
-                            <!--./ entry-date -->
-                            <div class="entry-date">
-                                On <span>Jan23 - 20</span>
-                            </div>
-                            <!--./ entry-date -->
-                        </div>
-                        <!--./ entry-meta-content -->
-                        <div class="read-more-wrap">
-                            <a class="read-more" href="single-post.html">Read Details</a>
-                        </div>
-                        <!--./ entry-content -->
-                    </div>
-                    <!--./ content-entry-wrap -->
-                </article>
-                {% endfor %}
+                    </main>
+                </div>
+                <!--右侧边栏-->
+                {% include 'right.html' %}
             </div>
-            <!--~./ end post ~-->
-
-            <!--~~~~~ Start Post ~~~~~-->
-            <div class="col-lg-6 col-md-6">
-                <article class="post hentry post-grid text-center style-one">
-                    <div class="entry-thumb">
-                        <figure class="thumb-wrap">
-                            <a href="single-post.html">
-                                <img src="../static/assets/images/post/homeOne/grid/post2.jpg" alt="post"/>
-                            </a>
-                        </figure>
-                        <!--./ thumb-wrap -->
-                    </div>
-                    <!--./ entry-thumb -->
-                    <div class="content-entry-wrap">
-                        <div class="entry-category">
-                            <a class="cat" href="#">Design</a>
-                            <a class="cat" href="#">Travel</a>
-                            <a class="cat" href="#">Photography</a>
-                        </div>
-                        <!--./ entry-category -->
-                        <h3 class="entry-title">
-                            <a href="single-post.html">Nature Photography Best Focus</a>
-                        </h3>
-                        <!--./ entry-title -->
-                        <div class="entry-meta-content">
-                            <div class="entry-author">
-                                By <a href="#">Zohan Alex</a>
-                            </div>
-                            <!--./ entry-date -->
-                            <div class="entry-date">
-                                On <span>Jan23 - 20</span>
-                            </div>
-                            <!--./ entry-date -->
-                        </div>
-                        <!--./ entry-meta-content -->
-                        <div class="read-more-wrap">
-                            <a class="read-more" href="single-post.html">Read Details</a>
-                        </div>
-                        <!--./ entry-content -->
-                    </div>
-                    <!--./ content-entry-wrap -->
-                </article>
-            </div>
-            <!--~./ end post ~-->
-
-            <!--~~~~~ Start Post ~~~~~-->
-            <div class="col-lg-6 col-md-6">
-                <article class="post hentry post-grid text-center style-one">
-                    <div class="entry-thumb">
-                        <figure class="thumb-wrap">
-                            <a href="single-post.html">
-                                <img src="../static/assets/images/post/homeOne/grid/post1.jpg" alt="post"/>
-                            </a>
-                        </figure>
-                        <!--./ thumb-wrap -->
-                    </div>
-                    <!--./ entry-thumb -->
-                    <div class="content-entry-wrap">
-                        <div class="entry-category">
-                            <a class="cat" href="#">Design</a>
-                            <a class="cat" href="#">Travel</a>
-                            <a class="cat" href="#">Photography</a>
-                        </div>
-                        <!--./ entry-category -->
-                        <h3 class="entry-title">
-                            <a href="single-post.html">Best WordPress Theme of 2018</a>
-                        </h3>
-                        <!--./ entry-title -->
-                        <div class="entry-meta-content">
-                            <div class="entry-author">
-                                By <a href="#">Zohan Alex</a>
-                            </div>
-                            <!--./ entry-date -->
-                            <div class="entry-date">
-                                On <span>Jan23 - 20</span>
-                            </div>
-                            <!--./ entry-date -->
-                        </div>
-                        <!--./ entry-meta-content -->
-                        <div class="read-more-wrap">
-                            <a class="read-more" href="single-post.html">Read Details</a>
-                        </div>
-                        <!--./ entry-content -->
-                    </div>
-                    <!--./ content-entry-wrap -->
-                </article>
-            </div>
-            <!--~./ end post ~-->
-
-            <!--~~~~~ Start Post ~~~~~-->
-            <div class="col-lg-6 col-md-6">
-                <article class="post hentry post-grid text-center style-one">
-                    <div class="entry-thumb">
-                        <figure class="thumb-wrap">
-                            <a href="single-post.html">
-                                <img src="../static/assets/images/post/homeOne/grid/post2.jpg" alt="post"/>
-                            </a>
-                        </figure>
-                        <!--./ thumb-wrap -->
-                    </div>
-                    <!--./ entry-thumb -->
-                    <div class="content-entry-wrap">
-                        <div class="entry-category">
-                            <a class="cat" href="#">Design</a>
-                            <a class="cat" href="#">Travel</a>
-                            <a class="cat" href="#">Photography</a>
-                        </div>
-                        <!--./ entry-category -->
-                        <h3 class="entry-title">
-                            <a href="single-post.html">Nature Photography Best Focus</a>
-                        </h3>
-                        <!--./ entry-title -->
-                        <div class="entry-meta-content">
-                            <div class="entry-author">
-                                By <a href="#">Zohan Alex</a>
-                            </div>
-                            <!--./ entry-date -->
-                            <div class="entry-date">
-                                On <span>Jan23 - 20</span>
-                            </div>
-                            <!--./ entry-date -->
-                        </div>
-                        <!--./ entry-meta-content -->
-                        <div class="read-more-wrap">
-                            <a class="read-more" href="single-post.html">Read Details</a>
-                        </div>
-                        <!--./ entry-content -->
-                    </div>
-                    <!--./ content-entry-wrap -->
-                </article>
-            </div>
-            <!--~./ end post ~-->
-
-            <!--~~~~~ Start Post ~~~~~-->
-            <div class="col-lg-6 col-md-6">
-                <article class="post hentry post-grid text-center style-one">
-                    <div class="entry-thumb">
-                        <figure class="thumb-wrap">
-                            <a href="single-post.html">
-                                <img src="../static/assets/images/post/homeOne/grid/post1.jpg" alt="post"/>
-                            </a>
-                        </figure>
-                        <!--./ thumb-wrap -->
-                    </div>
-                    <!--./ entry-thumb -->
-                    <div class="content-entry-wrap">
-                        <div class="entry-category">
-                            <a class="cat" href="#">Design</a>
-                            <a class="cat" href="#">Travel</a>
-                            <a class="cat" href="#">Photography</a>
-                        </div>
-                        <!--./ entry-category -->
-                        <h3 class="entry-title">
-                            <a href="single-post.html">Best WordPress Theme of 2018</a>
-                        </h3>
-                        <!--./ entry-title -->
-                        <div class="entry-meta-content">
-                            <div class="entry-author">
-                                By <a href="#">Zohan Alex</a>
-                            </div>
-                            <!--./ entry-date -->
-                            <div class="entry-date">
-                                On <span>Jan23 - 20</span>
-                            </div>
-                            <!--./ entry-date -->
-                        </div>
-                        <!--./ entry-meta-content -->
-                        <div class="read-more-wrap">
-                            <a class="read-more" href="single-post.html">Read Details</a>
-                        </div>
-                        <!--./ entry-content -->
-                    </div>
-                    <!--./ content-entry-wrap -->
-                </article>
-            </div>
-            <!--~./ end post ~-->
-
-            <!--~~~~~ Start Post ~~~~~-->
-            <div class="col-lg-6 col-md-6">
-                <article class="post hentry post-grid text-center style-one">
-                    <div class="entry-thumb">
-                        <figure class="thumb-wrap">
-                            <a href="single-post.html">
-                                <img src="../static/assets/images/post/homeOne/grid/post2.jpg" alt="post"/>
-                            </a>
-                        </figure>
-                        <!--./ thumb-wrap -->
-                    </div>
-                    <!--./ entry-thumb -->
-                    <div class="content-entry-wrap">
-                        <div class="entry-category">
-                            <a class="cat" href="#">Design</a>
-                            <a class="cat" href="#">Travel</a>
-                            <a class="cat" href="#">Photography</a>
-                        </div>
-                        <!--./ entry-category -->
-                        <h3 class="entry-title">
-                            <a href="single-post.html">Nature Photography Best Focus</a>
-                        </h3>
-                        <!--./ entry-title -->
-                        <div class="entry-meta-content">
-                            <div class="entry-author">
-                                By <a href="#">Zohan Alex</a>
-                            </div>
-                            <!--./ entry-date -->
-                            <div class="entry-date">
-                                On <span>Jan23 - 20</span>
-                            </div>
-                            <!--./ entry-date -->
-                        </div>
-                        <!--./ entry-meta-content -->
-                        <div class="read-more-wrap">
-                            <a class="read-more" href="single-post.html">Read Details</a>
-                        </div>
-                        <!--./ entry-content -->
-                    </div>
-                    <!--./ content-entry-wrap -->
-                </article>
-            </div>
-            <!--~./ end post ~-->
         </div>
-    </main>
+    </div>
 {% endblock content %}

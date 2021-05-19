@@ -34,6 +34,11 @@ def about(request):
     return render(request, 'about.html')
 
 
+# TODO:此处为single-post(detail)页面临时视图。
+def single_post(request):
+    return render(request, 'homeplate/single-post.html')
+
+
 # 文章列表视图
 def article_list(request):
     # # 取出所有博客文章
@@ -122,7 +127,7 @@ def article_detail(request, id):
     # 需要传递给模板的对象
     context = {'article': article, 'toc': md.toc, 'comments': comments}
     # 载入模板，并返回context对象
-    return render(request, 'detail.html', context)
+    return render(request, 'single-post.html', context)
 
 
 # 用户文章视图
@@ -140,6 +145,9 @@ def article_create(request):
             new_article.author = User.objects.get(id=request.user.id)
             if request.POST['column'] != 'none':
                 new_article.column = ArticleColumn.objects.get(id=request.POST['column'])
+            # 若上传了文章介绍图，则赋值
+            if 'introduce' in request.FILES:
+                new_article.introduce = new_article['introduce']
             # 将文章保存到数据库中
             new_article.save()
             # 完成后返回到文章列表

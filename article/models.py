@@ -25,6 +25,8 @@ class ArticleColumn(models.Model):
 class ArticlePost(models.Model):
     # 文章作者。参数 on_delete 用于指定数据删除的方式，避免两个关联表的数据不一致。
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # 文章介绍图
+    introduce = models.ImageField(upload_to='introduce/%Y%m%d/', blank=True)
     # 文章标题。models.CharField 为字符串字段，用于保存较短的字符串，比如标题
     title = models.CharField(max_length=100)
     # 文章正文。保存大量文本使用 TextField

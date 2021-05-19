@@ -9,7 +9,6 @@
 
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
-
     <!-- 文章详情 -->
     <div class="container">
         <div class="row">
@@ -18,7 +17,7 @@
                 <h1 class=" mt-4 mb-4">{{ article.title }}</h1>
                 <div class="col-12 alert alert-success">作者：{{ article.author }}
                     {% if user == article.author %}
-                        {#                <a href="#" onclick="confirm_delete()">删除文章</a>#}
+{#                        <a href="#" onclick="confirm_delete()">删除文章</a>#}
                         <!--表单发起 POST 请求，并携带了 csrf 令牌，从而避免了 csrf 攻击-->
                         <a href="#" onclick="confirm_safe_delete()">删除文章</a>
                         <a href="{% url 'article:article_update' article.id %}">编辑文章</a>
@@ -98,8 +97,8 @@
                         {{ comment.user }}
                     </strong>于
                     <span style="color: green">
-                            {{ comment.created|date:'Y-m-d H:i:s' }}
-                        </span>时说：
+                                {{ comment.created|date:'Y-m-d H:i:s' }}
+                            </span>时说：
                 </p>
                 <pre style="font-family: inherit;font-size: 1em;">{{ comment.body }}</pre>
             {% endfor %}

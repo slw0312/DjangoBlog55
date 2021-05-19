@@ -65,6 +65,7 @@
 {#        }#}
 {#    </script>#}
 {#{% endif %}#}
+{% load static %}
 
 <header class="site-header default-header-style intro-element">
     <div class="header-top-area">
@@ -84,7 +85,7 @@
                 <div class="col-4">
                     <div class="site-branding text-center">
                         <a href="index.html">
-                            <img src="../../static/assets/images/logo/logo.png" alt="Site Logo"/>
+                            <img src="{% static 'assets/images/logo/logo.png' %}" alt="Site Logo"/>
                         </a>
                     </div><!-- /.site-branding -->
                 </div>
