@@ -141,8 +141,8 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'jyj的博客 <jyj1519691288@163.com>'
 
 # 媒体文件地址
-MEDIA_URL = '/media/'   # 用户上传文件访问位置
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')   # 用户上传文件保存位置
+MEDIA_URL = '/media/'  # 用户上传文件访问位置
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # 用户上传文件保存位置
 
 # CKEDITOR_CONFIGS = {
 #     # django-ckeditor默认使用default配置

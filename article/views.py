@@ -35,7 +35,12 @@ class IndexView(PaginationMixin, ListView):
 
 # TODO:此处为about页面临时视图，将其放到合适的地方
 def about(request):
-    return render(request, 'about.html')
+    # 获取超级管理员用户信息
+    user = User.objects.get(is_superuser=1)
+    # 获取用户扩展信息
+    profile = Profile.objects.get(user=user)
+    content = {'profile': profile, 'user': user}
+    return render(request, 'about.html', content)
 
 
 # TODO:此处为single-post(detail)页面临时视图。

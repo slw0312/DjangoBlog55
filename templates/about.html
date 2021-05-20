@@ -1,3 +1,56 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block content %}
+    <main>
+        <div class="container nopadding-md">
+            <div class="py-5 z-depth-3" id="board">
+                <!--头像-->
+                <div class="about-avatar" align="center">
+                    <img src="{{ user.profile.avatar.url }}"
+                         srcset="{{ user.profile.avatar.url }}"
+                         class="img-fluid z-depth-1 rounded-circle" alt="avatar">
+                </div>
 
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-10 m-auto">
+                            <div class="text-center">
+                                <p class="h3">{{ user.username }}</p>
+                                <p>1999 / 08 / 08</p>
+                                <!--TODO:下拉式图片的插入-->
+                                <a href="https://github.com" target="_blank" rel="noopener" class="h4 px-1 false">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                </a>
+                                <a href="javascript:;" class="h4 px-1 qr-trigger">
+                                    <i class="fab fa-qq qrcode megamenu" aria-hidden="true"></i>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <span>
+                                            <img class="qr-img" src="{% static 'images/qrcode/qqqrcode.jpg' %}"
+                                                 srcset="{% static 'images/qrcode/qqqrcode.jpg' %}" alt="qrcode">
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </a>
+                                <a href="javascript:;" class="h4 px-1 qr-trigger">
+                                    <i class="fab fa-weixin qrcode" aria-hidden="true"></i>
+                                    <img class="qr-img"
+                                         src="/img/wx.png#%20%E6%B7%BB%E5%8A%A0%20qrcode%20%E5%90%8E%EF%BC%8C%E7%82%B9%E5%87%BB%E4%B8%8D%E5%86%8D%E8%B7%B3%E8%BD%AC%EF%BC%8C%E8%80%8C%E6%98%AF%E6%82%AC%E6%B5%AE%E4%BA%8C%E7%BB%B4%E7%A0%81%EF%BC%8C%E5%9B%A0%E6%AD%A4%E5%80%BC%E9%9C%80%E8%A6%81%E6%98%AF%E4%BA%8C%E7%BB%B4%E7%A0%81%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80"
+                                         srcset="/img/wx.png#%20%E6%B7%BB%E5%8A%A0%20qrcode%20%E5%90%8E%EF%BC%8C%E7%82%B9%E5%87%BB%E4%B8%8D%E5%86%8D%E8%B7%B3%E8%BD%AC%EF%BC%8C%E8%80%8C%E6%98%AF%E6%82%AC%E6%B5%AE%E4%BA%8C%E7%BB%B4%E7%A0%81%EF%BC%8C%E5%9B%A0%E6%AD%A4%E5%80%BC%E9%9C%80%E8%A6%81%E6%98%AF%E4%BA%8C%E7%BB%B4%E7%A0%81%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80"
+                                         alt="qrcode">
+                                </a>
+                            </div>
+                            <div class="mt-5 markdown-body">
+                                {#                                <h1 id="记录个人的学习经历"><a href="#记录个人的学习经历" class="headerlink" title="记录个人的学习经历"></a>记录个人的学习经历<a#}
+                                {#                                        class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon=""#}
+                                {#                                        href="#记录个人的学习经历"#}
+                                {#                                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h1>#}
+                                <p>{{ user.profile.bio }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
