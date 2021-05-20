@@ -132,16 +132,20 @@
                                     <ul class="mainmenu">
                                         <li><a href="{% url 'article:article_list' %}">首页</a></li>
                                         <li class="megamenu">
-                                            <a href="#">清单</a>
-                                            <ul class="sub-menu megamenu-main">
+                                            <a href="#">文章</a>
+                                            <ul class="sub-menu">
                                                 <li>
-                                                    拉下测试
+                                                    <a class="site-page child" href="{% url 'article:article_list' %}?search={{ search }}&column={{ column }}&tag={{ tag }}">
+                                                    <i class="fa-fw fas fa-history"></i> <span>最新文章</span></a>
+                                                </li>
+                                                <li><a class="site-page child" href="{% url 'article:article_list' %}?order=total_views&search={{ search }}&column={{ column }}&tag={{ tag }}">
+                                                    <i class="fa-fw fas fa-pencil-alt"></i> <span>最热文章</span></a>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li><a class="active" href="gallery.html">归档</a></li>
                                         <li><a href="{% url 'article:about' %}">关于</a></li>
-                                        <li><a href="contact.html">联系</a></li>
+                                        <li><a href="contact.html">留言</a></li>
                                     </ul> <!-- /.menu-list -->
                                 </div> <!-- /.hours-content-->
                             </div><!-- /.menu-wrapper -->

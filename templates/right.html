@@ -1,3 +1,4 @@
+{% load static %}
 {% load article_extras %}
 <div class="col-lg-3">
     <!-- Sidebar Items -->
@@ -5,12 +6,17 @@
         <!--~~~~~ Start About Me Widget ~~~~~-->
         <aside class="widget bt-about-me-widget">
             <h4 class="widget-title">
-                About Me
+                关于我
             </h4>
             <!-- /.widget-title -->
             <div class="widget-content">
                 <div class="author-thumb">
-                    <a href="{% url 'article:about' %}"><img src="{{ profile.avatar.url }}" alt="img"/></a>
+{#                        <img src="{{ profile.avatar.url }}" style="max-width: 20%; border-radius: 15%;"#}
+{#                             class="col-md-4">#}
+                    <img src="{{ profile.avatar.url }}" srcset="{{ profile.avatar.url }}"
+                         class="img-fluid z-depth-1 rounded-circle" alt="avatar">
+{#                                        <img src="{{ profile.avatar.url }}" style="max-width: 20%; border-radius: 15%;" class="col-md-4">#}
+{#                                        <a href="{% url 'article:about' %}"><img src="{{ profile.avatar.url }}" alt="img"/></a>#}
                 </div>
                 <div class="info">
                     <h3 class="designation">Writer & Photographer</h3>
@@ -18,9 +24,9 @@
                         When it comes to creating is a website for your
                         business, an attractive design
                     </p>
-                    <div class="author-sign">
-                        <img src="../static/assets/images/widget/about/signature.png" alt="img"/>
-                    </div>
+                    {#                    <div class="author-sign">#}
+                    {#                        <img src="../static/assets/images/widget/about/signature.png" alt="img"/>#}
+                    {#                    </div>#}
                 </div>
             </div>
         </aside>
@@ -35,62 +41,63 @@
         <!--~./ end post list widget ~-->
 
         <!--~~~~~ Start Bt Social Widget~~~~~-->
-        <aside class="widget bt-socail-widget">
-            <h4 class="widget-title">
-                Social
-            </h4>
-            <!-- /.widget-title -->
-            <div class="widget-content">
-                <div class="bt-socail-profile">
-                    <a class="bt-facebook-icon icon" href="#" target="_blank">
-											<span class="social-icon">
-												<i class="fab fa-facebook-square"></i>
-											</span>
-                        <span class="bt-name">facebook</span>
-                    </a>
-                </div>
-                <!--~./ bt-socail-profile ~-->
-
-                <div class="bt-socail-profile">
-                    <a class="bt-twitter-icon icon" href="#" target="_blank">
-											<span class="social-icon">
-												<i class="fab fa-twitter"></i>
-											</span>
-                        <span class="bt-name">twitter</span>
-                    </a>
-                </div>
-                <!--~./ bt-socail-profile ~-->
-
-                <div class="bt-socail-profile">
-                    <a class="bt-linkedin-icon icon" href="#" target="_blank">
-											<span class="social-icon">
-												<i class="fab fa-linkedin-in"></i>
-											</span>
-                        <span class="bt-name">linkedin</span>
-                    </a>
-                </div>
-                <!--~./ bt-socail-profile ~-->
-
-                <div class="bt-socail-profile">
-                    <a class="bt-youtube-icon icon" href="#" target="_blank">
-											<span class="social-icon">
-												<i class="fab fa-youtube"></i>
-											</span>
-                        <span class="bt-name">youtube</span>
-                    </a>
-                </div>
-                <!--~./ bt-socail-profile ~-->
-            </div>
-        </aside>
+        {% show_tags %}
+{#        <aside class="widget bt-socail-widget">#}
+{#            <h4 class="widget-title">#}
+{#                Social#}
+{#            </h4>#}
+{#            <!-- /.widget-title -->#}
+{#            <div class="widget-content">#}
+{#                <div class="bt-socail-profile">#}
+{#                    <a class="bt-facebook-icon icon" href="#" target="_blank">#}
+{#											<span class="social-icon">#}
+{#												<i class="fab fa-facebook-square"></i>#}
+{#											</span>#}
+{#                        <span class="bt-name">facebook</span>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <!--~./ bt-socail-profile ~-->#}
+{##}
+{#                <div class="bt-socail-profile">#}
+{#                    <a class="bt-twitter-icon icon" href="#" target="_blank">#}
+{#											<span class="social-icon">#}
+{#												<i class="fab fa-twitter"></i>#}
+{#											</span>#}
+{#                        <span class="bt-name">twitter</span>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <!--~./ bt-socail-profile ~-->#}
+{##}
+{#                <div class="bt-socail-profile">#}
+{#                    <a class="bt-linkedin-icon icon" href="#" target="_blank">#}
+{#											<span class="social-icon">#}
+{#												<i class="fab fa-linkedin-in"></i>#}
+{#											</span>#}
+{#                        <span class="bt-name">linkedin</span>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <!--~./ bt-socail-profile ~-->#}
+{##}
+{#                <div class="bt-socail-profile">#}
+{#                    <a class="bt-youtube-icon icon" href="#" target="_blank">#}
+{#											<span class="social-icon">#}
+{#												<i class="fab fa-youtube"></i>#}
+{#											</span>#}
+{#                        <span class="bt-name">youtube</span>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <!--~./ bt-socail-profile ~-->#}
+{#            </div>#}
+{#        </aside>#}
         <!--~./ end bt social widget ~-->
 
         <!--~~~~~ Start Advertisement Widget ~~~~~-->
-        <aside class="widget widget_advertisement">
-            <div class="widget-content">
-                <a href="#"><img src="../static/assets/images/widget/ads.jpg" alt="Advertisement"/></a>
-            </div>
-            <!-- /.widget-content -->
-        </aside>
+{#        <aside class="widget widget_advertisement">#}
+{#            <div class="widget-content">#}
+{#                <a href="#"><img src="../static/assets/images/widget/ads.jpg" alt="Advertisement"/></a>#}
+{#            </div>#}
+{#            <!-- /.widget-content -->#}
+{#        </aside>#}
         <!--~./ end Advertisement widget ~-->
     </div>
     <!--  /.sidebar-items -->

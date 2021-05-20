@@ -16,6 +16,10 @@ from django.db.models import Q
 from comment.models import Comment
 # 引入第三方库pure_pagination的分页混入类
 from pure_pagination.mixins import PaginationMixin
+# 引入用户扩展信息模型
+from userprofile.models import Profile
+# Django-taggit
+from taggit.managers import TaggableManager
 
 from django.views.generic import ListView
 
@@ -39,6 +43,7 @@ def single_post(request):
     return render(request, 'homeplate/single-post.html')
 
 
+# TODO：直接命名为首页视图
 # 文章列表视图
 def article_list(request):
     # # 取出所有博客文章
@@ -101,6 +106,10 @@ def article_list(request):
     page = request.GET.get('page')
     articles = paginator.get_page(page)
 
+    # 博主扩展信息
+    profile = Profile.objects.get(id=1)
+    # user = User.objects.get(is_superuser=1)
+
     # 需要传递给模板（templates）的对象
     context = {
         'articles': articles,
@@ -108,10 +117,33 @@ def article_list(request):
         'search': search,
         'column': column,
         'tag': tag,
+        'profile': profile,
     }
     # render函数：载入模板，并返回context对象
     return render(request, 'index.html', context)
     # return render(request, 'list.html', context)
+
+
+# 分类
+def category(request, pk):
+    cate = get_object_or_404(ArticleColumn, pk=pk)
+    articles = ArticlePost.objects.filter(column=cate).order_by('-created')
+    return render(request, 'index.html', context={'articles': articles})
+
+
+# 标签
+def tag(request, pk):
+    t = get_object_or_404(TaggableManager, pk=pk)
+    articles = ArticlePost.objects.filter(tags=t).order_by('-created_time')
+    return render(request, 'index.html', context={'articles': articles})
+
+
+# 归档
+def archive(request, year, month):
+    articles = ArticlePost.objects.filter(
+        created__year=year,
+        created__month=month).order_by('-created')
+    return render(request, 'index.html', context={'articles': articles})
 
 
 # 文章详情
@@ -251,18 +283,3 @@ def article_update(request, id):
         }
         # 将响应返回到模板中
         return render(request, 'update.html', context)
-
-
-# 分类
-def category(request, pk):
-    cate = get_object_or_404(ArticleColumn, pk=pk)
-    post_list = ArticlePost.objects.filter(column=cate).order_by('-created')
-    return render(request, 'index.html', context={'post_list': post_list})
-
-
-# 归档
-def archive(request, year, month):
-    post_list = ArticlePost.objects.filter(
-        created__year=year,
-        created__month=month).order_by('-created')
-    return render(request, 'index.html', context={'post_list': post_list})

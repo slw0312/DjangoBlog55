@@ -1,16 +1,14 @@
 <aside class="widget widget_categories">
-    <div class="widget widget-archives">
-        <h4 class="widget-title">归档</h4>
-        <ul>
-            {% for date in date_list %}
-                <li>
-                    <a href="{% url 'article:archive' date.year date.month %}">
-                        {{ date.year }} 年 {{ date.month }} 月
-                    </a>
-                </li>
-            {% empty %}
-                暂无归档！
-            {% endfor %}
-        </ul>
-    </div>
+    <h4 class="widget-title">归档</h4>
+    <ul>
+        {% for date in date_list %}
+            <li>
+                <a href="{% url 'article:archive' date.year date.month %}">
+                    {{ date.year }} 年 {{ date.month }} 月
+                </a>
+            </li>
+        {% empty %}
+            暂无归档！
+        {% endfor %}
+    </ul>
 </aside>

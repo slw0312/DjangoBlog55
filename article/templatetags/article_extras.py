@@ -18,3 +18,12 @@ def show_categories(context):
     return {
         'category_list': category_list,
     }
+
+
+@register.inclusion_tag('article/inclusions/_tags.html', takes_context=True)
+def show_tags(context):
+    tag_list = ArticlePost.tags.all
+    # .objects.annotate(num_posts=Count('article')).filter(num_posts__gt=0)
+    return {
+        'tag_list': tag_list,
+    }
