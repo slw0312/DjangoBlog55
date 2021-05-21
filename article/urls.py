@@ -5,10 +5,11 @@ from .views import IndexView
 app_name = 'article'
 
 urlpatterns = [
-    # 首页
-    path('', IndexView.as_view(), name='index'),
-    # 文章列表
-    path('article-list/', views.article_list, name='article_list'),
+    # # 首页
+    # path('', IndexView.as_view(), name='index'),
+    # 文章列表(首页)
+    # path('article-list/', views.article_list, name='article_list'),
+    path('', views.article_list, name='article_list'),
     # 文章详情
     path('article-detail/<int:id>/', views.article_detail, name='article_detail'),
     # 用户写文章

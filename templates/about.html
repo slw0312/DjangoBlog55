@@ -22,15 +22,8 @@
                                     <i class="fab fa-github" aria-hidden="true"></i>
                                 </a>
                                 <a href="javascript:;" class="h4 px-1 qr-trigger">
-                                    <i class="fab fa-qq qrcode megamenu" aria-hidden="true"></i>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <span>
-                                            <img class="qr-img" src="{% static 'images/qrcode/qqqrcode.jpg' %}"
-                                                 srcset="{% static 'images/qrcode/qqqrcode.jpg' %}" alt="qrcode">
-                                            </span>
-                                        </li>
-                                    </ul>
+                                    <i class="fab fa-qq qrcode" aria-hidden="true"></i>
+                                    <img class="qr-img" src="/img/qq.jpg" srcset="/img/qq.jpg" alt="qrcode">
                                 </a>
                                 <a href="javascript:;" class="h4 px-1 qr-trigger">
                                     <i class="fab fa-weixin qrcode" aria-hidden="true"></i>
@@ -41,10 +34,10 @@
                                 </a>
                             </div>
                             <div class="mt-5 markdown-body">
-                                {#                                <h1 id="记录个人的学习经历"><a href="#记录个人的学习经历" class="headerlink" title="记录个人的学习经历"></a>记录个人的学习经历<a#}
-                                {#                                        class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon=""#}
-                                {#                                        href="#记录个人的学习经历"#}
-                                {#                                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h1>#}
+{#                                <h1 id="记录个人的学习经历"><a href="#记录个人的学习经历" class="headerlink" title="记录个人的学习经历"></a>记录个人的学习经历<a#}
+{#                                        class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon=""#}
+{#                                        href="#记录个人的学习经历"#}
+{#                                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h1>#}
                                 <p>{{ user.profile.bio }}</p>
                             </div>
                         </div>

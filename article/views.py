@@ -182,8 +182,9 @@ def article_detail(request, id):
     # 将 article.body 中的 Markdown 文本解析成 HTML 文本
     article.body = md.convert(article.body)
 
+    article_list = ArticlePost.objects.all()
     # 需要传递给模板的对象
-    context = {'article': article, 'toc': md.toc, 'comments': comments}
+    context = {'article_list': article_list, 'article': article, 'toc': md.toc, 'comments': comments}
     # 载入模板，并返回context对象
     return render(request, 'single-post.html', context)
     # return render(request, 'detail.html', context)

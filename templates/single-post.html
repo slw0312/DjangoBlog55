@@ -23,22 +23,20 @@
                             <div class="entry-header">
                                 <div class="entry-category">
                                     <a class="cat" href="#">{{ article.column }}</a>
-                                    {% for tag in article.tags.all %}
-                                        <a class="cat" href="#">{{ tag }}</a>
-                                    {% endfor %}
                                 </div>
                                 <!--./ entry-category -->
                                 <h3 class="entry-title">
                                     {{ article.title }}
                                 </h3>
                                 <!--./ entry-title -->
-                                <div class="entry-meta-content container text-center">
+                                {#                                <div class="entry-meta-content">#}
+                                <div class="container" style="color: white">
                                     {#                                <div class="container text-center white-text fadeInUp">#}
                                     <p class="mt-3 post-meta">
                                         <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                                         更新日期 {{ article.updated|date:'Y-m-d' }}
                                     </p>
-                                    <p class="mt-1 " style="text-indent:1em">
+                                    <p class="mt-1 post-meta" style="text-indent:1em">
                                         <span class="post-meta">
                                             <i class="far fa-eye" aria-hidden="true"></i>
                                             <span id="busuanzi_value_page_pv">{{ article.total_views }}</span> 次
@@ -65,21 +63,27 @@
                                     <div class="container nopadding-md" id="board-ctn">
                                         <div class="py-5 z-depth-3" id="board">
                                             <div class="post-content mx-auto" id="post">
-                                                <div class="markdown-body">
+                                                <div class="markdown-body col-lg-8">
                                                     {{ article.body|safe }}
                                                 </div>
                                                 <hr>
-                                                <div>
+                                                <div class="col-lg-8">
                                                     <p>
+                                                        <!--栏目-->
                                                         <span>
                                                             <i class="iconfont icon-inbox"></i>
                                                             <a class="hover-with-bg"
-                                                               href="#">前端学习</a>&nbsp;
+                                                               href="#">{{ article.column }}</a>&nbsp;
                                                         </span>&nbsp;&nbsp;
                                                         <span>
                                                             <i class="iconfont icon-tag"></i>
-                                                            <a class="hover-with-bg"
-                                                               href="#">JavaScript</a>
+                                                            {% for tag in article.tags.all %}
+                                                                <a class="hover-with-bg"
+                                                                   href="{% url 'article:tag' tag.pk %}">
+                                                                    {{ tag }}  </a>
+                                                            {% empty %}
+                                                                暂无标签！
+                                                            {% endfor %}
                                                         </span>
                                                     </p>
                                                 </div>
@@ -107,19 +111,19 @@
                         <!-- Custom -->
                     </main>
 
-                    <!--TODO:引入栏目和标题-->
-                    <!--栏目＆标签-->
-                    <div class="entry-footer">
-                        <div class="entry-tag">
-                            <strong>标签: </strong>
-                            <a href="#" rel="tag">fashion</a>
-                            <a href="#" rel="tag">world</a>
-                            <a href="#" rel="tag">technology</a>
-                            <a href="#" rel="tag">fun</a>
-                            <a href="#" rel="tag">lifestyle</a>
-                        </div>
-                        <!--/.entry-tag-->
-                    </div>
+                    {#                    <!--TODO:引入栏目和标题-->#}
+                    {#                    <!--栏目＆标签-->#}
+                    {#                    <div class="entry-footer">#}
+                    {#                        <div class="entry-tag">#}
+                    {#                            <strong>标签: </strong>#}
+                    {#                            <a href="#" rel="tag">fashion</a>#}
+                    {#                            <a href="#" rel="tag">world</a>#}
+                    {#                            <a href="#" rel="tag">technology</a>#}
+                    {#                            <a href="#" rel="tag">fun</a>#}
+                    {#                            <a href="#" rel="tag">lifestyle</a>#}
+                    {#                        </div>#}
+                    {#                        <!--/.entry-tag-->#}
+                    {#                    </div>#}
                 </div>
             </article><!-- /.post -->
 
@@ -149,63 +153,63 @@
                 </div>
 
                 <!--相关文章-->
-                {% if 1 %}
-                    <div class="related-posts-block">
-                        <div class="row">
-                            <div class="col-12">
-                                <h3 class="related-title">Related Posts</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            {% for article in articles %}
-                                <div class="col-lg-4 col-md-6">
-                                    <article class="post post-grid-style post-grid-style-two">
-                                        <div class="entry-thumb">
-                                            <figure class="thumb-wrap">
-                                                <a href="{% url 'article:article_detail' article.id %}">
-                                                    {% if article.introduce %}
-                                                        <img src="{{ article.introduce.url }}" alt="post"/>
-                                                    {% else %}
-                                                        <img src="/media/introduce/django.jpg" alt="post"/>
-                                                    {% endif %}
-                                                </a>
-                                            </figure>
-                                            <!--./ thumb-wrap -->
-                                        </div>
-                                        <!--./ entry-thumb -->
-                                        <div class="content-entry-wrap">
-                                            <div class="entry-category">
-                                                <a class="cat" href="#">Design</a>
-                                                <a class="cat" href="#">Travel</a>
-                                                <a class="cat" href="#">Photography</a>
-                                            </div>
-                                            <!--./ entry-category -->
-                                            <h3 class="entry-title">
-                                                <a href="single-post.html">
-                                                    How To Use Checklists To Improve Your UX
-                                                </a>
-                                            </h3>
-                                            <!--./ entry-title -->
-                                        </div>
-                                        <!--./ content-entry-wrap -->
-                                        <div class="entry-user">
-                                            <div class="thumb">
-                                                <img src="../static/assets/images/author/author1.png" alt="Thumb"/>
-                                            </div>
-                                            <div class="info">
-                                                <div class="author-name">
-                                                    <a href="#">Karri Saarinen</a>
-                                                </div>
-                                                <div class="entry-date">Dec 5, 2019</div>
-                                                <!--./ entry-time -->
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                            {% endfor %}
+                <div class="related-posts-block">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 class="related-title">相关文章</h3>
                         </div>
                     </div>
-                {% endif %}
+                    <div class="row">
+                        {% for arti in articles %}
+                            {% if arti.column == article %}
+                            <div class="col-lg-4 col-md-6">
+                                <article class="post post-grid-style post-grid-style-two">
+                                    <div class="entry-thumb">
+                                        <figure class="thumb-wrap">
+                                            <a href="{% url 'article:article_detail' article.id %}">
+                                                {% if article.introduce %}
+                                                    <img src="{{ article.introduce.url }}" alt="post"/>
+                                                {% else %}
+                                                    <img src="/media/introduce/django.jpg" alt="post"/>
+                                                {% endif %}
+                                            </a>
+                                        </figure>
+                                        <!--./ thumb-wrap -->
+                                    </div>
+                                    <!--./ entry-thumb -->
+                                    <div class="content-entry-wrap">
+                                        <div class="entry-category">
+                                            <a class="cat" href="#">Design</a>
+                                            <a class="cat" href="#">Travel</a>
+                                            <a class="cat" href="#">Photography</a>
+                                        </div>
+                                        <!--./ entry-category -->
+                                        <h3 class="entry-title">
+                                            <a href="single-post.html">
+                                                How To Use Checklists To Improve Your UX
+                                            </a>
+                                        </h3>
+                                        <!--./ entry-title -->
+                                    </div>
+                                    <!--./ content-entry-wrap -->
+                                    <div class="entry-user">
+                                        <div class="thumb">
+                                            <img src="../static/assets/images/author/author1.png" alt="Thumb"/>
+                                        </div>
+                                        <div class="info">
+                                            <div class="author-name">
+                                                <a href="#">Karri Saarinen</a>
+                                            </div>
+                                            <div class="entry-date">Dec 5, 2019</div>
+                                            <!--./ entry-time -->
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
 
                 <!--发表文章评论-->
                 <div class="comment-respond">
