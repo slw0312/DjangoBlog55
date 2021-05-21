@@ -1,0 +1,36 @@
+<!--页码导航-->
+<div class="col-lg-3"></div>
+<div class="col-lg-4">
+    <nav class="navigation paging-navigation pd-t-30">
+        <ul class="nav-links">
+            <!-- 如果不是第一页，则显示上翻按钮 -->
+            {% if articles.has_previous %}
+                <li><a href="?page=1&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}">
+                        <i class="fas fa-angle-left"></i></a></li>
+                <li><a href="?page={{ articles.previous_page_number }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}">
+                        {{ articles.previous_page_number }}</a></li>
+                {#                                <li><a href="?page={{ articles.number }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}">#}
+                {#                                        {{ articles.number }}</a></li>#}
+                {% if articles.has_next %}
+                    <li><a href="?page={{ articles.next_page_number }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}">
+                            {{ articles.next_page_number }}</a></li>
+                {% endif %}
+            {% endif %}
+            <!-- 当前页面 -->
+            <li><a href="?page={{ articles.number }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}"
+                   class="current btn-dark">
+                    {{ articles.number }}</a></li>
+            {#                            <span class="current btn-danger">#}
+            {#                                {{ articles.number }}</span>#}
+
+            <!-- 如果不是最末页，则显示下翻按钮 -->
+            {% if articles.has_next %}
+                <li><a href="?page={{ articles.next_page_number }}">
+                    {{ articles.next_page_number }}</a></li>
+                <li><a href="?page={{ articles.paginator.num_pages }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}">
+                        <i class="fas fa-angle-right"></i></a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+<div class="col-lg-5"></div>

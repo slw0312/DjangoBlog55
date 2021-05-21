@@ -38,17 +38,15 @@
                                         </div>
                                         <!--./ entry-thumb -->
                                         <div class="content-entry-wrap">
-                                            <div class="entry-category">
-                                                <a class="cat" href="#">Design</a>
-                                                <a class="cat" href="#">Travel</a>
-                                                <a class="cat" href="#">Photography</a>
-                                            </div>
-                                            <!--./ entry-category -->
                                             <h3 class="entry-title">
                                                 <a href="{% url 'article:article_detail' article.id %}">
                                                     {{ article.title }}</a>
                                             </h3>
                                             <!--./ entry-title -->
+                                            <div class="entry-content">
+                                                <p style="color: grey">{{ article.body|slice:'100' }}...</p>
+                                            </div>
+                                            <p></p>
                                             <div class="entry-meta-content">
                                                 <div class="entry-views">
                                                     <i class="far fa-eye" aria-hidden="true">
@@ -78,6 +76,8 @@
                 </div>
                 <!--右侧边栏-->
                 {% include 'right.html' %}
+                <!--页码导航-->
+                {% include 'page_navigation.html' %}
             </div>
         </div>
     </div>

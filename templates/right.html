@@ -11,25 +11,146 @@
             <!-- /.widget-title -->
             <div class="widget-content">
                 <div class="author-thumb">
-{#                        <img src="{{ profile.avatar.url }}" style="max-width: 20%; border-radius: 15%;"#}
-{#                             class="col-md-4">#}
-                    <img src="{{ profile.avatar.url }}" srcset="{{ profile.avatar.url }}"
+                    {#                        <img src="{{ profile.avatar.url }}" style="max-width: 20%; border-radius: 15%;"#}
+                    {#                             class="col-md-4">#}
+                    <img src="{{ user.profile.avatar.url }}" srcset="{{ user.profile.avatar.url }}"
                          class="img-fluid z-depth-1 rounded-circle" alt="avatar">
-{#                                        <img src="{{ profile.avatar.url }}" style="max-width: 20%; border-radius: 15%;" class="col-md-4">#}
-{#                                        <a href="{% url 'article:about' %}"><img src="{{ profile.avatar.url }}" alt="img"/></a>#}
+                    {#                                                            <img src="{{ profile.avatar.url }}" style="max-width: 20%; border-radius: 15%;" class="col-md-4">#}
+                    {#                                        <a href="{% url 'article:about' %}"><img src="{{ profile.avatar.url }}" alt="img"/></a>#}
                 </div>
                 <div class="info">
-                    <h3 class="designation">Writer & Photographer</h3>
-                    <p>
-                        When it comes to creating is a website for your
-                        business, an attractive design
-                    </p>
-                    {#                    <div class="author-sign">#}
-                    {#                        <img src="../static/assets/images/widget/about/signature.png" alt="img"/>#}
-                    {#                    </div>#}
+                    <h3 class="designation">{{ user.username }}</h3>
+{#                    <h3 class="designation">{{ article.author_id.username }}</h3>#}
+                    <p>{{ user.profile.bio }}</p>
+                    <div class="tagcloud">
+                        <a href="#">
+                            <div class="headline">文章</div>
+                            <div class="length-num">{% total_articles %}</div>
+                        </a>
+                        <a href="#">
+                            <div class="headline">标签</div>
+                            <div class="length-num">{% total_tags %}</div>
+                        </a>
+                        <a href="#">
+                            <div class="headline">分类</div>
+                            <div class="length-num">{% total_categories %}</div>
+                        </a>
+                    </div>
+
+                    <p></p>
+
+                    <div class="content-entry-wrap">
+                        <a class="social-icon" href="mailto:865717150@qq.com" target="_blank" title="Email" rel="external nofollow noopener noreferrer">
+                            <i class="fas fa-envelope"></i></a>
+                        <a class="social-icon" href="/atom.xml" target="_blank" title="RSS">
+                            <i class="fas fa-rss-square"></i></a>
+                        <a class="social-icon" href="https://weibo.com/u/5252319712" target="_blank" title="github" rel="external nofollow noopener noreferrer">
+                            <i class="fa fa-github"></i></a>
+                    </div>
                 </div>
             </div>
         </aside>
+
+        {#        <div class="card-widget card-info wow animate__zoomIn" data-wow-duration="" data-wow-delay="" data-wow-offset=""#}
+        {#             data-wow-iteration="" style="visibility: visible; animation-name: zoomIn;">#}
+        {#            <div class="card-info-avatar is-center"><img class="avatar-img entered loaded"#}
+        {#                                                         data-lazy-src="/img/author.png"#}
+        {#                                                         onerror="this.onerror=null,this.src=&quot;https://cdn.jsdelivr.net/npm/akilar-candyassets/image/404.gif&quot;"#}
+        {#                                                         alt="avatar" data-ll-status="loaded" src="/img/author.png">#}
+        {#                <div class="author-info__name">Akilar</div>#}
+        {#                <div class="author-info__description">#}
+        {#                    <center style="font-family:Poem"><b>流水幽吟绕耳边，<br>煦风馨语抚心弦，<br>挥臂欲揽冰钩月，<br>银星斟酌醉人涎。</b></center>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#            <div class="card-info-data">#}
+        {#                <div class="card-info-data-item is-center"><a href="/archives/" data-pjax-state="">#}
+        {#                    <div class="headline">文章</div>#}
+        {#                    <div class="length-num">431</div>#}
+        {#                </a></div>#}
+        {#                <div class="card-info-data-item is-center"><a href="/tags/" data-pjax-state="">#}
+        {#                    <div class="headline">标签</div>#}
+        {#                    <div class="length-num">60</div>#}
+        {#                </a></div>#}
+        {#                <div class="card-info-data-item is-center"><a href="/categories/" data-pjax-state="">#}
+        {#                    <div class="headline">分类</div>#}
+        {#                    <div class="length-num">6</div>#}
+        {#                </a></div>#}
+        {#            </div>#}
+        {#            <pangu></pangu>#}
+        {#            <a class="button--animated" id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer"#}
+        {#               href="https://jq.qq.com/?_wv=1027&amp;k=tNuEdliQ"><i#}
+        {#                    class="fa fa-paper-plane faa-tada"></i><span>欢迎光临糖果屋</span></a>#}
+        {#            <div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover"#}
+        {#                                                             href="https://github.com/Akilarlxh"#}
+        {#                                                             rel="external nofollow noreferrer" target="_blank"#}
+        {#                                                             title="Github">#}
+        {#                <svg class="icon faa-tada" aria-hidden="true">#}
+        {#                    <use xlink:href="#icon-identity-01"></use>#}
+        {#                </svg>#}
+        {#            </a><a class="social-icon faa-parent animated-hover" href="mailto:Akilarlxh@gmail.com"#}
+        {#                   rel="external nofollow noreferrer" target="_blank" title="Email">#}
+        {#                <svg class="icon faa-tada" aria-hidden="true">#}
+        {#                    <use xlink:href="#icon-Openmail-01"></use>#}
+        {#                </svg>#}
+        {#            </a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/22976782"#}
+        {#                   rel="external nofollow noreferrer" target="_blank" title="Bilibili">#}
+        {#                <svg class="icon faa-tada" aria-hidden="true">#}
+        {#                    <use xlink:href="#icon-film-01"></use>#}
+        {#                </svg>#}
+        {#            </a><a class="social-icon faa-parent animated-hover" href="https://music.163.com/#/user/home?id=292643778"#}
+        {#                   rel="external nofollow noreferrer" target="_blank" title="Cloudmusic">#}
+        {#                <svg class="icon faa-tada" aria-hidden="true">#}
+        {#                    <use xlink:href="#icon-songlist-01"></use>#}
+        {#                </svg>#}
+        {#            </a><a class="social-icon faa-parent animated-hover"#}
+        {#                   href="https://cdn.jsdelivr.net/gh/Akilarlxh/Akilarlxh.github.io/atom.xml"#}
+        {#                   rel="external nofollow noreferrer" target="_blank" title="RSS">#}
+        {#                <svg class="icon faa-tada" aria-hidden="true">#}
+        {#                    <use xlink:href="#icon-pushpin-01"></use>#}
+        {#                </svg>#}
+        {#            </a></div>#}
+        {#        </div>#}
+
+        {#        <div class="card-widget card-info">#}
+        {#            <div class="card-info-avatar is-center"><img class="avatar-img" src="/img/logo.jpg"#}
+        {#                                                         onerror="this.onerror=null,this.src=&quot;/img/friend_404.gif&quot;"#}
+        {#                                                         alt="avatar">#}
+        {#                <div class="author-info__name">Justlovesmile</div>#}
+        {#                <div class="author-info__description">一个计算机专业学生的个人博客，记录着学习笔记和生活中的思考，期待着和所有人相遇</div>#}
+        {#            </div>#}
+        {#            <div class="card-info-data">#}
+        {#                <div class="card-info-data-item is-center"><a href="/archives/">#}
+        {#                    <div class="headline">文章</div>#}
+        {#                    <div class="length-num">67</div>#}
+        {#                </a></div>#}
+        {#                <div class="card-info-data-item is-center"><a href="/tags/">#}
+        {#                    <div class="headline">标签</div>#}
+        {#                    <div class="length-num">72</div>#}
+        {#                </a></div>#}
+        {#                <div class="card-info-data-item is-center"><a href="/categories/">#}
+        {#                    <div class="headline">分类</div>#}
+        {#                    <div class="length-num">6</div>#}
+        {#                </a></div>#}
+        {#            </div>#}
+        {#            <a class="button--animated" id="card-info-btn" target="_blank" rel="external nofollow noopener noreferrer"#}
+        {#               href="https://github.com/Justlovesmile"><i class="fab fa-github"></i><span>Follow Me</span></a>#}
+        {#            <div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:865717150@qq.com"#}
+        {#                                                             target="_blank" title="Email"#}
+        {#                                                             rel="external nofollow noopener noreferrer"><i#}
+        {#                    class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i#}
+        {#                    class="fas fa-rss-square"></i></a><a class="social-icon" href="https://weibo.com/u/5252319712"#}
+        {#                                                         target="_blank" title="微博"#}
+        {#                                                         rel="external nofollow noopener noreferrer"><i#}
+        {#                    class="fa fa-weibo"></i></a><a class="social-icon"#}
+        {#                                                   href="https://music.163.com/user/home?id=551641101" target="_blank"#}
+        {#                                                   title="网易云音乐" rel="external nofollow noopener noreferrer"><i#}
+        {#                    class="fas iconfont icon-netease"></i></a><a class="social-icon"#}
+        {#                                                                 href="https://space.bilibili.com/168738824"#}
+        {#                                                                 target="_blank" title="Bilibili"#}
+        {#                                                                 rel="external nofollow noopener noreferrer"><i#}
+        {#                    class="fas iconfont icon-bilibili"></i></a></div>#}
+        {#        </div>#}
+
         <!--~./ end about me widget ~-->
 
         <!--~~~~~ Start Categories Widget ~~~~~-->
@@ -42,62 +163,62 @@
 
         <!--~~~~~ Start Bt Social Widget~~~~~-->
         {% show_tags %}
-{#        <aside class="widget bt-socail-widget">#}
-{#            <h4 class="widget-title">#}
-{#                Social#}
-{#            </h4>#}
-{#            <!-- /.widget-title -->#}
-{#            <div class="widget-content">#}
-{#                <div class="bt-socail-profile">#}
-{#                    <a class="bt-facebook-icon icon" href="#" target="_blank">#}
-{#											<span class="social-icon">#}
-{#												<i class="fab fa-facebook-square"></i>#}
-{#											</span>#}
-{#                        <span class="bt-name">facebook</span>#}
-{#                    </a>#}
-{#                </div>#}
-{#                <!--~./ bt-socail-profile ~-->#}
-{##}
-{#                <div class="bt-socail-profile">#}
-{#                    <a class="bt-twitter-icon icon" href="#" target="_blank">#}
-{#											<span class="social-icon">#}
-{#												<i class="fab fa-twitter"></i>#}
-{#											</span>#}
-{#                        <span class="bt-name">twitter</span>#}
-{#                    </a>#}
-{#                </div>#}
-{#                <!--~./ bt-socail-profile ~-->#}
-{##}
-{#                <div class="bt-socail-profile">#}
-{#                    <a class="bt-linkedin-icon icon" href="#" target="_blank">#}
-{#											<span class="social-icon">#}
-{#												<i class="fab fa-linkedin-in"></i>#}
-{#											</span>#}
-{#                        <span class="bt-name">linkedin</span>#}
-{#                    </a>#}
-{#                </div>#}
-{#                <!--~./ bt-socail-profile ~-->#}
-{##}
-{#                <div class="bt-socail-profile">#}
-{#                    <a class="bt-youtube-icon icon" href="#" target="_blank">#}
-{#											<span class="social-icon">#}
-{#												<i class="fab fa-youtube"></i>#}
-{#											</span>#}
-{#                        <span class="bt-name">youtube</span>#}
-{#                    </a>#}
-{#                </div>#}
-{#                <!--~./ bt-socail-profile ~-->#}
-{#            </div>#}
-{#        </aside>#}
+        {#        <aside class="widget bt-socail-widget">#}
+        {#            <h4 class="widget-title">#}
+        {#                Social#}
+        {#            </h4>#}
+        {#            <!-- /.widget-title -->#}
+        {#            <div class="widget-content">#}
+        {#                <div class="bt-socail-profile">#}
+        {#                    <a class="bt-facebook-icon icon" href="#" target="_blank">#}
+        {#											<span class="social-icon">#}
+        {#												<i class="fab fa-facebook-square"></i>#}
+        {#											</span>#}
+        {#                        <span class="bt-name">facebook</span>#}
+        {#                    </a>#}
+        {#                </div>#}
+        {#                <!--~./ bt-socail-profile ~-->#}
+        {##}
+        {#                <div class="bt-socail-profile">#}
+        {#                    <a class="bt-twitter-icon icon" href="#" target="_blank">#}
+        {#											<span class="social-icon">#}
+        {#												<i class="fab fa-twitter"></i>#}
+        {#											</span>#}
+        {#                        <span class="bt-name">twitter</span>#}
+        {#                    </a>#}
+        {#                </div>#}
+        {#                <!--~./ bt-socail-profile ~-->#}
+        {##}
+        {#                <div class="bt-socail-profile">#}
+        {#                    <a class="bt-linkedin-icon icon" href="#" target="_blank">#}
+        {#											<span class="social-icon">#}
+        {#												<i class="fab fa-linkedin-in"></i>#}
+        {#											</span>#}
+        {#                        <span class="bt-name">linkedin</span>#}
+        {#                    </a>#}
+        {#                </div>#}
+        {#                <!--~./ bt-socail-profile ~-->#}
+        {##}
+        {#                <div class="bt-socail-profile">#}
+        {#                    <a class="bt-youtube-icon icon" href="#" target="_blank">#}
+        {#											<span class="social-icon">#}
+        {#												<i class="fab fa-youtube"></i>#}
+        {#											</span>#}
+        {#                        <span class="bt-name">youtube</span>#}
+        {#                    </a>#}
+        {#                </div>#}
+        {#                <!--~./ bt-socail-profile ~-->#}
+        {#            </div>#}
+        {#        </aside>#}
         <!--~./ end bt social widget ~-->
 
         <!--~~~~~ Start Advertisement Widget ~~~~~-->
-{#        <aside class="widget widget_advertisement">#}
-{#            <div class="widget-content">#}
-{#                <a href="#"><img src="../static/assets/images/widget/ads.jpg" alt="Advertisement"/></a>#}
-{#            </div>#}
-{#            <!-- /.widget-content -->#}
-{#        </aside>#}
+        {#        <aside class="widget widget_advertisement">#}
+        {#            <div class="widget-content">#}
+        {#                <a href="#"><img src="../static/assets/images/widget/ads.jpg" alt="Advertisement"/></a>#}
+        {#            </div>#}
+        {#            <!-- /.widget-content -->#}
+        {#        </aside>#}
         <!--~./ end Advertisement widget ~-->
     </div>
     <!--  /.sidebar-items -->

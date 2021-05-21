@@ -70,6 +70,7 @@ def article_list(request):
     tag = request.GET.get('tag')
     # 初始化查询集
     article_list = ArticlePost.objects.all()
+    # article_list.num = ArticlePost.objects.count()
     # 用户搜索逻辑
     if search:
         if order == 'total_views':
@@ -111,9 +112,7 @@ def article_list(request):
     page = request.GET.get('page')
     articles = paginator.get_page(page)
 
-    # 博主扩展信息
-    profile = Profile.objects.get(id=1)
-    # user = User.objects.get(is_superuser=1)
+    user = get_blog_user()
 
     # 需要传递给模板（templates）的对象
     context = {
@@ -122,7 +121,9 @@ def article_list(request):
         'search': search,
         'column': column,
         'tag': tag,
-        'profile': profile,
+        'user': user,
+        # 'profile': profile,
+        # 'article_list': article_list,
     }
     # render函数：载入模板，并返回context对象
     return render(request, 'index.html', context)
@@ -133,14 +134,22 @@ def article_list(request):
 def category(request, pk):
     cate = get_object_or_404(ArticleColumn, pk=pk)
     articles = ArticlePost.objects.filter(column=cate).order_by('-created')
-    return render(request, 'index.html', context={'articles': articles})
+    # paginator = Paginator(article_list, 6)
+    # page = request.GET.get('page')
+    # articles = paginator.get_page(page)
+    user = get_blog_user()
+    return render(request, 'index.html', context={'articles': articles, 'user': user})
 
 
 # 标签
 def tag(request, pk):
-    t = get_object_or_404(TaggableManager, pk=pk)
-    articles = ArticlePost.objects.filter(tags=t).order_by('-created_time')
-    return render(request, 'index.html', context={'articles': articles})
+    t = get_object_or_404(ArticlePost.tags, pk=pk)
+    articles = ArticlePost.objects.filter(tags=t).order_by('-created')
+    # paginator = Paginator(article_list, 6)
+    # page = request.GET.get('page')
+    # articles = paginator.get_page(page)
+    user = get_blog_user()
+    return render(request, 'index.html', context={'articles': articles, 'user': user})
 
 
 # 归档
@@ -148,7 +157,8 @@ def archive(request, year, month):
     articles = ArticlePost.objects.filter(
         created__year=year,
         created__month=month).order_by('-created')
-    return render(request, 'index.html', context={'articles': articles})
+    user = get_blog_user()
+    return render(request, 'index.html', context={'articles': articles, 'user': user})
 
 
 # 文章详情
@@ -182,9 +192,12 @@ def article_detail(request, id):
     # 将 article.body 中的 Markdown 文本解析成 HTML 文本
     article.body = md.convert(article.body)
 
-    article_list = ArticlePost.objects.all()
+    article_list = ArticlePost.objects.filter(column=article.column).order_by('-total_views')[:3]
+
+    user = get_blog_user()
+
     # 需要传递给模板的对象
-    context = {'article_list': article_list, 'article': article, 'toc': md.toc, 'comments': comments}
+    context = {'article_list': article_list, 'article': article, 'toc': md.toc, 'comments': comments, 'user': user}
     # 载入模板，并返回context对象
     return render(request, 'single-post.html', context)
     # return render(request, 'detail.html', context)
@@ -289,3 +302,14 @@ def article_update(request, id):
         }
         # 将响应返回到模板中
         return render(request, 'update.html', context)
+
+
+def get_blog_user():
+    # 博主扩展信息
+    # profile = Profile.objects.get(id=1)
+    # user = User.objects.get(is_superuser=1)
+    # 获取超级管理员用户信息
+    user = User.objects.get(is_superuser=1)
+    return user
+    # 获取用户扩展信息
+    # profile = Profile.objects.get(user=user)

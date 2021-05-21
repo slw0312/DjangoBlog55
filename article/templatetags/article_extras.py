@@ -27,3 +27,21 @@ def show_tags(context):
     return {
         'tag_list': tag_list,
     }
+
+
+@register.simple_tag
+def total_articles():
+    # 返回文章对象总数
+    return ArticlePost.objects.count()
+
+
+@register.simple_tag
+def total_tags():
+    # 返回文章对象总数
+    return ArticlePost.tags.count()
+
+
+@register.simple_tag
+def total_categories():
+    # 返回文章对象总数
+    return ArticleColumn.objects.count()
