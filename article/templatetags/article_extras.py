@@ -1,14 +1,16 @@
 from django import template
 from django.db.models.aggregates import Count
-from ..models import ArticlePost, ArticleColumn, TaggableManager
+from ..models import ArticlePost, ArticleColumn
+# from django.core.paginator import Paginator
 
 register = template.Library()
 
 
 @register.inclusion_tag('article/inclusions/_archives.html', takes_context=True)
 def show_archives(context):
+    date_list = ArticlePost.objects.dates('created', 'month', order='DESC')
     return {
-        'date_list': ArticlePost.objects.dates('created', 'month', order='DESC'),
+        'date_list': date_list,
     }
 
 

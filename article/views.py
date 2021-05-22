@@ -18,10 +18,12 @@ from comment.models import Comment
 from pure_pagination.mixins import PaginationMixin
 # 引入用户扩展信息模型
 from userprofile.models import Profile
+# 引入评论表单
+from comment.forms import CommentForm
 # Django-taggit
 from taggit.managers import TaggableManager
 
-from django.views.generic import ListView
+from django.views.generic import ListView, View
 
 
 # Create your views here.
@@ -48,7 +50,6 @@ def single_post(request):
     return render(request, 'homeplate/single-post.html')
 
 
-# TODO：直接命名为首页视图
 # 文章列表视图
 def article_list(request):
     # # 取出所有博客文章
@@ -112,7 +113,7 @@ def article_list(request):
     page = request.GET.get('page')
     articles = paginator.get_page(page)
 
-    user = get_blog_user()
+    author = get_blog_user()
 
     # 需要传递给模板（templates）的对象
     context = {
@@ -121,7 +122,7 @@ def article_list(request):
         'search': search,
         'column': column,
         'tag': tag,
-        'user': user,
+        'author': author,
         # 'profile': profile,
         # 'article_list': article_list,
     }
@@ -130,35 +131,70 @@ def article_list(request):
     # return render(request, 'list.html', context)
 
 
+# 所有文章归档页
+def archive_page(request):
+    article_list = ArticlePost.objects.all()
+    return render(request, 'article/archives.html', {'article_list': article_list})
+
+
+# 所有分类页
+def categories_page(request):
+    category_list = ArticleColumn.objects.all()
+    return render(request, 'article/categories.html', {'category_list': category_list})
+
+
+# 所有标签页
+def tags_page(request):
+    tag_list = ArticlePost.tags
+    print(tag_list)
+    return render(request, 'article/tags.html', {'tag_list': tag_list})
+
+
 # 分类
 def category(request, pk):
     cate = get_object_or_404(ArticleColumn, pk=pk)
-    articles = ArticlePost.objects.filter(column=cate).order_by('-created')
+    articles_list = ArticlePost.objects.filter(column=cate).order_by('-created')
     # paginator = Paginator(article_list, 6)
     # page = request.GET.get('page')
     # articles = paginator.get_page(page)
-    user = get_blog_user()
-    return render(request, 'index.html', context={'articles': articles, 'user': user})
+    author = get_blog_user()
+    paginator = Paginator(articles_list, 6)
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
+    context = {'articles': articles, 'author': author}
+    return render(request, 'index.html',context)
 
 
 # 标签
 def tag(request, pk):
     t = get_object_or_404(ArticlePost.tags, pk=pk)
-    articles = ArticlePost.objects.filter(tags=t).order_by('-created')
+    articles_list = ArticlePost.objects.filter(tags=t).order_by('-created')
     # paginator = Paginator(article_list, 6)
     # page = request.GET.get('page')
     # articles = paginator.get_page(page)
-    user = get_blog_user()
-    return render(request, 'index.html', context={'articles': articles, 'user': user})
+    paginator = Paginator(articles_list, 6)
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
+    author = get_blog_user()
+    return render(request, 'index.html', context={'articles': articles, 'author': author})
 
 
 # 归档
 def archive(request, year, month):
-    articles = ArticlePost.objects.filter(
+    print(year, month)
+    articles_list = ArticlePost.objects.filter(
         created__year=year,
         created__month=month).order_by('-created')
-    user = get_blog_user()
-    return render(request, 'index.html', context={'articles': articles, 'user': user})
+    # test = ArticlePost.objects.filter(pk=6)
+    # print(type(test[0].created))
+    # print(test[0].created__month)
+    # print(test[0].created__year)
+    # print(test[0])
+    paginator = Paginator(articles_list, 6)
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
+    author = get_blog_user()
+    return render(request, 'index.html', context={'articles': articles, 'author': author})
 
 
 # 文章详情
@@ -191,16 +227,32 @@ def article_detail(request, id):
     )
     # 将 article.body 中的 Markdown 文本解析成 HTML 文本
     article.body = md.convert(article.body)
-
     article_list = ArticlePost.objects.filter(column=article.column).order_by('-total_views')[:3]
-
-    user = get_blog_user()
+    # 引入评论表单
+    comment_form = CommentForm()
+    author = get_blog_user()
 
     # 需要传递给模板的对象
-    context = {'article_list': article_list, 'article': article, 'toc': md.toc, 'comments': comments, 'user': user}
+    context = {
+        'article_list': article_list,
+        'article': article,
+        'toc': md.toc,
+        'comments': comments,
+        'author': author,
+        'comment_form': comment_form,
+    }
     # 载入模板，并返回context对象
     return render(request, 'single-post.html', context)
     # return render(request, 'detail.html', context)
+
+
+# 点赞数 +1
+class IncreaseLikesView(View):
+    def post(self, request, *args, **kwargs):
+        article = ArticlePost.objects.get(id=kwargs.get('id'))
+        article.likes += 1
+        article.save()
+        return HttpResponse('success')
 
 
 # 用户文章视图

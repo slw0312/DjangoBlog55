@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'comment',
     'home',
     'taggit',
+    'ckeditor',  # 富文本编辑器
+    'mptt',  # 多级回复
+    'notifications',  # 消息通知
+    'notice'  # 消息通知
 ]
 
 MIDDLEWARE = [
@@ -117,7 +121,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
@@ -146,32 +150,32 @@ DEFAULT_FROM_EMAIL = 'jyj的博客 <jyj1519691288@163.com>'
 MEDIA_URL = '/media/'  # 用户上传文件访问位置
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # 用户上传文件保存位置
 
-# CKEDITOR_CONFIGS = {
-#     # django-ckeditor默认使用default配置
-#     'default': {
-#         # 编辑器宽度自适应
-#         'width':'auto',
-#         'height':'250px',
-#         # tab键转换空格数
-#         'tabSpaces': 4,
-#         # 工具栏风格
-#         'toolbar': 'Custom',
-#         # 工具栏按钮
-#         'toolbar_Custom': [
-#             # 表情 代码块
-#             ['Smiley', 'CodeSnippet'],
-#             # 字体风格
-#             ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Blockquote'],
-#             # 字体颜色
-#             ['TextColor', 'BGColor'],
-#             # 链接
-#             ['Link', 'Unlink'],
-#             # 列表
-#             ['NumberedList', 'BulletedList'],
-#             # 最大化
-#             ['Maximize']
-#         ],
-#         # 加入代码块插件
-#         'extraPlugins': ','.join(['codesnippet', 'prism', 'widget', 'lineutils']),
-#     }
-# }
+CKEDITOR_CONFIGS = {
+    # django-ckeditor默认使用default配置
+    'default': {
+        # 编辑器宽度自适应
+        'width':'auto',
+        'height':'250px',
+        # tab键转换空格数
+        'tabSpaces': 4,
+        # 工具栏风格
+        'toolbar': 'Custom',
+        # 工具栏按钮
+        'toolbar_Custom': [
+            # 表情 代码块
+            ['Smiley', 'CodeSnippet'],
+            # 字体风格
+            ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Blockquote'],
+            # 字体颜色
+            ['TextColor', 'BGColor'],
+            # 链接
+            ['Link', 'Unlink'],
+            # 列表
+            ['NumberedList', 'BulletedList'],
+            # 最大化
+            ['Maximize']
+        ],
+        # 加入代码块插件
+        'extraPlugins': ','.join(['codesnippet', 'prism', 'widget', 'lineutils']),
+    }
+}

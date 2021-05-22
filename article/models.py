@@ -39,6 +39,8 @@ class ArticlePost(models.Model):
     updated = models.DateTimeField(auto_now=True)
     # 文章浏览量
     total_views = models.PositiveIntegerField(default=0)
+    # 点赞数统计
+    likes = models.PositiveIntegerField(default=0)
     # 文章标签
     tags = TaggableManager(blank=True)
     # 文章栏目的 “一对多” 外键
@@ -59,6 +61,10 @@ class ArticlePost(models.Model):
     # 获取文章地址
     def get_absolute_url(self):
         return reverse('article:article_detail', args=[self.id])
+
+    # @property
+    # def get_body_length(self):
+    #     return len(self.body)
 
     def __str__(self):
         return self.title

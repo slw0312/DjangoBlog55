@@ -13,41 +13,55 @@
                 <div class="author-thumb">
                     {#                        <img src="{{ profile.avatar.url }}" style="max-width: 20%; border-radius: 15%;"#}
                     {#                             class="col-md-4">#}
-                    <img src="{{ user.profile.avatar.url }}" srcset="{{ user.profile.avatar.url }}"
+                    <img src="{{ author.profile.avatar.url }}" srcset="{{ author.profile.avatar.url }}"
                          class="img-fluid z-depth-1 rounded-circle" alt="avatar">
                     {#                                                            <img src="{{ profile.avatar.url }}" style="max-width: 20%; border-radius: 15%;" class="col-md-4">#}
                     {#                                        <a href="{% url 'article:about' %}"><img src="{{ profile.avatar.url }}" alt="img"/></a>#}
                 </div>
                 <div class="info">
-                    <h3 class="designation">{{ user.username }}</h3>
-{#                    <h3 class="designation">{{ article.author_id.username }}</h3>#}
-                    <p>{{ user.profile.bio }}</p>
+                    <h3 class="designation">{{ author.username }}</h3>
+                    {#                    <h3 class="designation">{{ article.author_id.username }}</h3>#}
+                    <p>{{ author.profile.bio }}</p>
                     <div class="tagcloud">
-                        <a href="#">
+                        <a href="{% url 'article:archive_page' %}">
                             <div class="headline">文章</div>
                             <div class="length-num">{% total_articles %}</div>
                         </a>
-                        <a href="#">
+                        <a href="{% url 'article:tags_page' %}">
                             <div class="headline">标签</div>
                             <div class="length-num">{% total_tags %}</div>
                         </a>
-                        <a href="#">
-                            <div class="headline">分类</div>
+                        <a href="{% url 'article:categories_page' %}">
+                            <div class="headline">栏目</div>
                             <div class="length-num">{% total_categories %}</div>
                         </a>
                     </div>
 
-                    <p></p>
-
-                    <div class="content-entry-wrap">
-                        <a class="social-icon" href="mailto:865717150@qq.com" target="_blank" title="Email" rel="external nofollow noopener noreferrer">
-                            <i class="fas fa-envelope"></i></a>
-                        <a class="social-icon" href="/atom.xml" target="_blank" title="RSS">
-                            <i class="fas fa-rss-square"></i></a>
-                        <a class="social-icon" href="https://weibo.com/u/5252319712" target="_blank" title="github" rel="external nofollow noopener noreferrer">
-                            <i class="fa fa-github"></i></a>
-                    </div>
+                    {#                    <p></p>#}
+                    {##}
+                    {#                    <div class="content-entry-wrap">#}
+                    {#                        <a class="social-icon" href="mailto:865717150@qq.com" target="_blank" title="Email" rel="external nofollow noopener noreferrer">#}
+                    {#                            <i class="fas fa-envelope"></i></a>#}
+                    {#                        <a class="social-icon" href="/atom.xml" target="_blank" title="RSS">#}
+                    {#                            <i class="fas fa-rss-square"></i></a>#}
+                    {#                        <a class="social-icon" href="https://weibo.com/u/5252319712" target="_blank" title="github" rel="external nofollow noopener noreferrer">#}
+                    {#                            <i class="fab fa-github-square"></i></a>#}
+                    {#                    </div>#}
                 </div>
+            </div>
+        </aside>
+
+        <aside class="widget bt-about-me-widget">
+            <!--天气＆日历-->
+            <h4 class="widget-title"><i class="el-bulb"></i>今日天气
+            </h4>
+            <div class="widget-content">
+                <ul>
+                    <li><i class="el-cloud"></i>
+                        <iframe width="250" scrolling="no" height="90" frameborder="0" allowtransparency="true"
+                                src="https://i.tianqi.com?c=code&id=7&icon=1&site=12"></iframe>
+                    </li>
+                </ul>
             </div>
         </aside>
 

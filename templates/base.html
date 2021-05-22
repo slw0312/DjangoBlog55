@@ -7,7 +7,7 @@
 <head>
     <!-- 预留网站标题的位置 -->
     {% block title %}
-        <title>SHUerBlog</title>
+        <title>BlackCar</title>
     {% endblock %}
     <!-- 网站采用的字符编码 -->
     <meta charset="UTF-8">
@@ -19,30 +19,42 @@
             rel="stylesheet">
     <!--CSS-->
     <!-- 引入bootstrap的css文件 -->
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <!-- 引入monokai.css -->
-    <link rel="stylesheet" href="/static/md_css/monokai.css">
-    <!--以下为新增部分css-->
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}"/>
-    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'assets/css/simple-scrollbar.css' %}"/>
-    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.all.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}"/>
-    <!--new css  form Goatherd-->
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'md_css/default.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-{#    <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">#}
-{#    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">#}
-{#    <link rel="stylesheet" href="/css/main.css">#}
-    <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}"/>
+    <!--以下为新增部分css-->
+{#    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}"/>#}
+{#    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}"/>#}
+{#    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}"/>#}
+{#    <link rel="stylesheet" href="{% static 'assets/css/simple-scrollbar.css' %}"/>#}
+{#    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.all.min.css' %}"/>#}
+    <!--new css  form Goatherd-->
+{#    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">#}
+{#    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">#}
+{#    <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">#}
+{#    <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">#}
+
+    <!--其它自定义样式-->
+    <!-- 粘性侧边栏样式 -->
+    <style>
+        .sidebar {
+            will-change: min-height;
+        }
+
+        .sidebar__inner {
+            transform: translate(0, 0);
+            transform: translate3d(0, 0, 0);
+            will-change: position, transform;
+        }
+    </style>
 </head>
 
 <body class="bg-white-smoke">
 
-{#<!--页面预加载-->#}
+<!--页面预加载-->
 {#<div class="preloader">#}
 {#    <div class="preloader-inner">#}
 {#        <div class="preloader-icon">#}

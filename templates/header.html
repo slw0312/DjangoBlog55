@@ -75,17 +75,45 @@
                     <div class="intro-socail-share">
                         <div class="share-alt"><span class="fa fa-share-alt"></span></div>
                         <div class="socail-share">
-                            <a href="#"><span class="fab fa-facebook-f"></span></a>
-                            <a href="#"><span class="fab fa-twitter"></span></a>
-                            <a href="#"><span class="fab fa-instagram"></span></a>
-                            <a href="#"><span class="fab fa-pinterest-p "></span></a>
+                            <a href="#"><span class="fab fa-qq" data-toggle="modal" data-target="#qqqrcode"></span></a>
+                            <a href="#"><span class="fab fa-weixin" data-toggle="modal" data-target="#wxqrcode"></span></a>
+                            <a href="https://github.com/SpencerYJJ" target="_blank" title="github"
+                               rel="external nofollow noopener noreferrer">
+                                <span class="fab fa-github"></span>
+                            </a>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="qqqrcode" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <img src="{% static 'images/qrcode/qqqrcode.jpg' %}" alt=""
+                                                 style="width:100%;">
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+                            <div class="modal fade" id="wxqrcode" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <img src="{% static 'images/qrcode/wxqrcode.png' %}" alt=""
+                                                 style="width:100%;">
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+
+                            {#                            <a href="#"><span class="fab fa-pinterest-p "></span></a>#}
                         </div>
                     </div><!-- /.intro-socail-share -->
                 </div>
                 <div class="col-4">
                     <div class="site-branding text-center">
-                        <a href="index.html">
-                            <img src="{% static 'assets/images/logo/logo.png' %}" alt="Site Logo"/>
+                        <a href="{% url 'article:article_list' %}">
+                            <img src="{% static 'images/logo1.png' %}" alt="Site Logo"/>
                         </a>
                     </div><!-- /.site-branding -->
                 </div>
@@ -96,19 +124,23 @@
                                 <i class="fas fa-search"></i>
                             </div>
                             <div class="search-form">
-                                <form action="#">
-                                    <input type="search" placeholder="Search">
-                                    <button type="submit"><i class="fas fa-search"></i></button>
+                                <form action="">
+                                    <input type="search"
+                                           class="form-control mb-3 mr-sm-3"
+                                           name="search"
+                                           placeholder="搜索文章"
+                                           required>
+                                    {#                                        <button type="submit"><i class="fas fa-search"></i></button>#}
                                 </form>
                             </div>
                         </div>
                         <!--~./ search-wrap ~-->
-                        <div class="header-card-area">
-                            <a href="#">
-                                <span class="fas fa-shopping-cart"></span>
-                                <sup>2</sup>
-                            </a>
-                        </div>
+                        {#                        <div class="header-card-area">#}
+                        {#                            <a href="#">#}
+                        {#                                <span class="fas fa-shopping-cart"></span>#}
+                        {#                                <sup>2</sup>#}
+                        {#                            </a>#}
+                        {#                        </div>#}
                         <!--~./ header card area ~-->
 
                         <div class="hamburger-menus">
@@ -130,22 +162,73 @@
                             <div class="menu-wrapper">
                                 <div class="menu-content">
                                     <ul class="mainmenu">
-                                        <li><a href="gallery.html">归档</a></li>
-                                        <li class="megamenu">
-                                            <a href="#">文章</a>
+                                        <li><a href="{% url 'article:archive_page' %}">归档</a></li>
+                                        <li class="dropdown">
+                                            <a href="{% url 'article:article_list' %}">文章</a>
                                             <ul class="sub-menu">
                                                 <li>
-                                                    <a class="site-page child" href="{% url 'article:article_list' %}?search={{ search }}&column={{ column }}&tag={{ tag }}">
-                                                    <i class="fa-fw fas fa-history"></i> <span>最新文章</span></a>
+                                                    <a class="dropdown-item"
+                                                       href="{% url 'article:article_list' %}?search={{ search }}&column={{ column }}&tag={{ tag }}">
+                                                        <i class="fa-fw fas fa-history"></i> <span>最新文章</span></a>
                                                 </li>
-                                                <li><a class="site-page child" href="{% url 'article:article_list' %}?order=total_views&search={{ search }}&column={{ column }}&tag={{ tag }}">
+                                                <li><a class="dropdown-item"
+                                                       href="{% url 'article:article_list' %}?order=total_views&search={{ search }}&column={{ column }}&tag={{ tag }}">
                                                     <i class="fa-fw fas fa-pencil-alt"></i> <span>最热文章</span></a>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li><a class="active" href="{% url 'article:article_list' %}">首页</a></li>
-                                        <li><a href="{% url 'article:about' %}">关于</a></li>
-                                        <li><a href="contact.html">留言</a></li>
+                                        <li class="dropdown">
+                                            <a href="#">分类</a>
+                                            <ul class="sub-menu">
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url 'article:categories_page' %}">
+                                                        <i class="fa-fw fas fa-box-open"></i> <span>栏目</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url 'article:tags_page' %}">
+                                                        <i class="fa-fw fas fa-tags"></i> <span>标签</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        {#                                        <li><a href="contact.html">消息</a></li>#}
+                                        <!--TODO:用户登录改为消息&下拉框：登录/退出登录-->
+                                        {% if user.is_authenticated %}
+                                            <!-- 如果用户已经登录，则显示用户名下拉框 -->
+                                            <li class="dropdown">
+                                            <a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                               aria-haspopup="true" aria-expanded="false">
+                                                <!--消息通知红点-->
+                                                {% if unread_count %}
+                                                    <svg viewBox="0 0 8 8"
+                                                         width="8px"
+                                                         height="8px">
+                                                        <circle cx="4" cy="4" r="4" fill="#ff6b6b"></circle>
+                                                    </svg>
+                                                {% endif %}
+                                                {{ user.username }}
+                                            </a>
+                                            {#                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+                                            <ul class="sub-menu">
+                                            <li>
+                                                <!--通知计数 -->
+                                                <a class="dropdown-item" href="{% url "notice:list" %}">通知
+                                                    {% if unread_count %}
+                                                        <span class="badge badge-danger">{{ unread_count }}</span>
+                                                    {% endif %}
+                                                </a>
+                                                <a class="dropdown-item"
+                                                   href="{% url "userprofile:logout" %}">退出登录</a>
+                                                {#                                                </div>#}
+                                            </li>
+                                            <!-- 如果用户未登录，则显示 “登录” -->
+                                        {% else %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'userprofile:login' %}">登录</a>
+                                            </li>
+                                        {% endif %}
+                                        </ul>
+                                        </li>
                                     </ul> <!-- /.menu-list -->
                                 </div> <!-- /.hours-content-->
                             </div><!-- /.menu-wrapper -->

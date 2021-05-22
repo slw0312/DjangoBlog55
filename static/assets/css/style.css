@@ -3008,7 +3008,7 @@ body:not(.buddypress) .article-content table th {
   height: 50px;
   line-height: 50px;
   padding: 0 25px;
-  width: 85%;
+  width: 100%;
 }
 @media only screen and (max-width: 575px) {
   .search-wrap .search-form input[type="search"] {

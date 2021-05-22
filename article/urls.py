@@ -23,6 +23,14 @@ urlpatterns = [
     path('categories/<int:pk>/', views.category, name='category'),
     path('archives/<int:year>/<int:month>/', views.archive, name='archive'),
     path('tags/<int:pk>/', views.tag, name='tag'),
+    # 点赞 +1
+    path('increase-likes/<int:id>/', views.IncreaseLikesView.as_view(), name='increase_likes'),
+    # 整体归档页
+    path('archive_page', views.archive_page, name='archive_page'),
+    # 所有分类页
+    path('categories_page', views.categories_page, name='categories_page'),
+    # 所有标签页
+    path('tags_page', views.tags_page, name='tags_page'),
     # 类视图详情页
     # path('article-view/<int:pk>', views.ArticleDetailView.as_view(), name='...'),
     # 类视图创建文章页

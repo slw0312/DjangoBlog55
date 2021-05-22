@@ -1,32 +1,106 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% block title %}
+    <title>登录</title>
+{% endblock %}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <br>
-                <h5>还没有账号？</h5>
-                <h5>点击<a href="{% url 'userprofile:register' %}">注册账号</a>加入我们吧！</h5>
-                <br>
-                <form method="post" action=".">
-                    {% csrf_token %}
-                    <!-- 账号 -->
-                    <div class="form-group">
-                        <label for="username">账号</label>
-                        <input type="text" class="form-control" id="username" name="username">
+    <main>
+        <div class="container nopadding-md">
+            <div class="card col-12 col-md-6 m-auto">
+                <div class="py-5 z-depth-3" id="board">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-md-10 m-auto">
+                                <div style="text-align:right">
+                                    <span><a href="{% url 'userprofile:register' %}">注册账号</a></span>
+                                    <span><a href="{% url 'password_reset_recover' %}">重置密码</a></span>
+                                </div>
+                                <form method="post" action=".">
+                                    {% csrf_token %}
+                                    <!-- 账号 -->
+                                    <div class="form-group">
+                                        <i class="fa fa-user fa-lg"></i>
+                                        <label for="username">账号</label>
+                                        <input type="text" class="form-control" id="username" name="username">
+                                    </div>
+                                    <!-- 密码 -->
+                                    <div class="form-group">
+                                        <i class="fa fa-lock fa-lg"></i>
+                                        <label for="password">密码</label>
+                                        <input type="password" class="form-control" id="password" name="password">
+                                    </div>
+                                    <!-- 登录 -->
+                                    <div style="text-align:center;">
+                                        <button type="submit" class="btn btn-dark">登录</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <!-- 密码 -->
-                    <div class="form-group">
-                        <label for="password">密码</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                    </div>
-                    <!-- 提交按钮 -->
-                    <button type="submit" class="btn btn-primary">提交</button>
-                </form>
-                <br>
-                <h5>忘记密码了？</h5>
-                <h5>点击<a href="{% url 'password_reset_recover' %}">这里</a>重置密码</h5>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    {#    <div class="container">#}
+    {#        <div class="form row">#}
+    {#            <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="login_form">#}
+    {#                <h3 class="form-title">Login to your account</h3>#}
+    {#                <div class="col-sm-9 col-md-9">#}
+    {#                    <div class="form-group">#}
+    {#                        <i class="fa fa-user fa-lg"></i>#}
+    {#                        <input class="form-control required" type="text" placeholder="Username" name="username"#}
+    {#                               autofocus="autofocus" maxlength="20"/>#}
+    {#                    </div>#}
+    {#                    <div class="form-group">#}
+    {#                        <i class="fa fa-lock fa-lg"></i>#}
+    {#                        <input class="form-control required" type="password" placeholder="Password" name="password"#}
+    {#                               maxlength="8"/>#}
+    {#                    </div>#}
+    {#                    <div class="form-group">#}
+    {#                        <label class="checkbox">#}
+    {#                            <input type="checkbox" name="remember" value="1"/> Remember me#}
+    {#                        </label>#}
+    {#                        <hr/>#}
+    {#                        <a href="javascript:;" id="register_btn" class="">Create an account</a>#}
+    {#                    </div>#}
+    {#                    <div class="form-group">#}
+    {#                        <input type="submit" class="btn btn-success pull-right" value="Login "/>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </form>#}
+    {#        </div>#}
+    {##}
+    {#        <div class="form row">#}
+    {#            <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="register_form">#}
+    {#                <h3 class="form-title">Login to your account</h3>#}
+    {#                <div class="col-sm-9 col-md-9">#}
+    {#                    <div class="form-group">#}
+    {#                        <i class="fa fa-user fa-lg"></i>#}
+    {#                        <input class="form-control required" type="text" placeholder="Username" name="username"#}
+    {#                               autofocus="autofocus"/>#}
+    {#                    </div>#}
+    {#                    <div class="form-group">#}
+    {#                        <i class="fa fa-lock fa-lg"></i>#}
+    {#                        <input class="form-control required" type="password" placeholder="Password"#}
+    {#                               id="register_password" name="password"/>#}
+    {#                    </div>#}
+    {#                    <div class="form-group">#}
+    {#                        <i class="fa fa-check fa-lg"></i>#}
+    {#                        <input class="form-control required" type="password" placeholder="Re-type Your Password"#}
+    {#                               name="rpassword"/>#}
+    {#                    </div>#}
+    {#                    <div class="form-group">#}
+    {#                        <i class="fa fa-envelope fa-lg"></i>#}
+    {#                        <input class="form-control eamil" type="text" placeholder="Email" name="email"/>#}
+    {#                    </div>#}
+    {#                    <div class="form-group">#}
+    {#                        <input type="submit" class="btn btn-success pull-right" value="Sign Up "/>#}
+    {#                        <input type="submit" class="btn btn-info pull-left" id="back_btn" value="Back"/>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </form>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    <script type="text/javascript" src="js/main.js"></script>#}
+
 {% endblock content %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load article_extras %}
+
+{% block title %}
+    <title>标签云</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container nopadding-md">
+        <div class="card">
+            <div class="py-5 z-depth-3" id="board">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-10 m-auto">
+                            <div class="text-center tagcloud" style="font-size: x-large">
+                                {% show_tags %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
